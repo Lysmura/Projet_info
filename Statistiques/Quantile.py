@@ -1,7 +1,4 @@
-from re import I
-
-
-class Min(Univaries):
+class Quantile(Univaries):
     """
     Calcule la moyenne d'une colonne choisit
 
@@ -15,8 +12,3 @@ class Min(Univaries):
                 raise ValueError("Le format de la variable n'est pas bon")
         except ValueError as ve:
             print(ve)
-        moyenne = 0
-        for i in col:
-            moyenne = moyenne + i
-        moyenne = moyenne/len(col)
-        return moyenne

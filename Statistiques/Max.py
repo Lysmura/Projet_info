@@ -1,14 +1,14 @@
-import Univaries
+import Statistiques.Univaries as Univaries
 
 class Max(Univaries):
     """
     Calcule la valeur maximum d'une colonne choisit
 
     Methods:
-    __calcul(col) : var
+    __operation(col) : var
         Retourne la valeur maximum d'une variable numérique dans une colonne
     """
-    def __calcul(self, col):
+    def __operation(self, col):
         try:
             if isinstance(col[0], int) == FALSE AND isinstance(col[0], float) == FALSE:
                 raise ValueError("Le format de la variable n'est pas bon")
