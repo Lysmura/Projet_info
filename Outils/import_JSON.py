@@ -1,17 +1,36 @@
 import gzip
 import json
 from my_import import Import
+
+
+
 class import_json(Import):
-    def __init__(self,chemin,nom_fichier):
+    def __init__(self, chemin, nom_fichier):
         super().__init__(chemin, nom_fichier)
+    
     def importing(self):
-        with gzip.open(self.chemin + "/" +self.nom_fichier, mode='rt') as gzfile :
+        with gzip.open(self.chemin + '/' + self.nom_fichier, mode='rt') as gzfile :
             data = json.load(gzfile)
-        return data
+        cles = [str(k) for k in range(0,len(data))]
+        lignes = [[0]*len(data[0]['fields']) for k in range(0,len(data))]
+        L=[]
+        i=0
+        for dictionnaire in data:
+            for champ in dictionnaire:
+                if champ == 'fields':
+                    for k in dictionnaire[champ]:
+                        L += [dictionnaire[champ][k]]
+                    lignes[i] = L
+                    L = []
+                    i = i + 1
+        
+        new_data = dict()
+        for key, value in zip(cles, lignes):
+            new_data[key] = value
+        
+        return new_data
+        
 
-
-#Test
-# class_import = import_json(chemin='../electricity_data',nom_fichier='/2022-12.json.gz')
-# data_json = class_import.importing()
-# print(data_json)
+data_exemple = import_json('D:/Projet_info/donnee/donnees_electricite','2013-01.json.gz').importing()
+print(data_exemple['2'])
 
