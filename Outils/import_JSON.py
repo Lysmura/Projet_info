@@ -13,6 +13,7 @@ class import_json(Import):
             data = json.load(gzfile)
         cles = [str(k) for k in range(0,len(data))]
         lignes = [[0]*len(data[0]['fields']) for k in range(0,len(data))]
+        header = [k for k in data[0]['fields']]
         L=[]
         i=0
         for dictionnaire in data:
@@ -28,9 +29,15 @@ class import_json(Import):
         for key, value in zip(cles, lignes):
             new_data[key] = value
         
-        return new_data
+        return [header,new_data]
+    @staticmethod
+    def get_header(data):
+        pass
         
-
+        
+        
+        
+        
 data_exemple = import_json('D:/Projet_info/donnee/donnees_electricite','2013-01.json.gz').importing()
 print(data_exemple['2'])
 
