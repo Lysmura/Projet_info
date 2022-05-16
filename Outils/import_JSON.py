@@ -32,7 +32,11 @@ class import_json(Import):
         #     new_data[key] = value
 
         data=self.dataOutput()
-        header = list(set([k  for d in data for k in d['fields'].keys()]))
+        list_header = []
+        for d in data:
+            for k in d['fields'].keys():
+                list_header.append(k)
+        header = list(set(list_header))
         new_data ={}
         for index, dic in enumerate(data):
             list_values=[]
