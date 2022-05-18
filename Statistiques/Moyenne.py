@@ -1,22 +1,23 @@
-from re import I
+import Statistiques.Univaries as Univaries
 
-
-class Min(Univaries):
+class Moyenne(Univaries):
     """
     Calcule la moyenne d'une colonne choisit
 
     Methods:
-    __operation(col) : float
+    _operation(col) : float
         Retourne la valeur moyenne d'une variable numérique dans une colonne
     """
-    def __operation(self, col):
+    def _operation(self, col):
         try:
-            if (isinstance(col[0], int) == FALSE AND isinstance(col[0], float)) == FALSE:
+            if isinstance(col[0], int) == False and isinstance(col[0], float) == False :
                 raise ValueError("Le format de la variable n'est pas bon")
         except ValueError as ve:
             print(ve)
         moyenne = 0
         for i in col:
-            moyenne = moyenne + i
-        moyenne = moyenne/len(col)
+            if i != 'mq':
+                moyenne = moyenne + i
+                n = n + 1
+        moyenne = moyenne/n
         return moyenne
