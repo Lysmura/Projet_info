@@ -68,9 +68,9 @@ class Dataframe :
         return len(self.data)
 
     def __str__(self):
-        affichage="{}: \n".format(self.nom)
+        affichage="{}: \n   ".format(self.nom)
         for i in self.header:
-            affichage += i[0] + " "
+            affichage += i[0] + "   "
         affichage += "\n"
         for key, value in self.data.items():
             affichage += "{} ".format(key) + str(value) + "\n"
@@ -94,9 +94,9 @@ class Dataframe :
         id = None
         temp_id = 0
         for i in self.header :
-            temp_id += 1
             if i[0] == nom_col:
                 id = temp_id
+            temp_id += 1
         if id is None :
             print("Mauvais nom de colonne")
         else:
@@ -165,9 +165,9 @@ class Dataframe :
         id = None
         temp_id = 0
         for i in self.header :
-            temp_id += 1
             if nom == i[0]:
                 id = temp_id
+            temp_id += 1
         if id is None:
             print("La colonne n'existe pas.")
         else :
@@ -259,9 +259,9 @@ class Dataframe :
         id = None
         temp_id = 0
         for i in self.header :
-            temp_id += 1
             if i[0] == variable:
                 id = temp_id
+            temp_id += 1
         if id is None :
             print("Mauvais nom de variable")
         else :
