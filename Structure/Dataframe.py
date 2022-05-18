@@ -121,7 +121,7 @@ class Dataframe :
         else:
             if isinstance(colonne[0], float) is True :
                 for i in colonne:
-                    if isinstance(i, float) is False and i != 'mq' :
+                    if (isinstance(i, float) is False and isinstance(i, int) is False) and i != 'mq' :
                         print("La valeur {i} n'est pas au bon format !")
                         raise TypeError
                 self.header.append([nom, "float"])
@@ -197,7 +197,7 @@ class Dataframe :
             print("Cette ligne n'existe pas.")
             raise IndexError
         else :
-            return self.data["{numero}"]
+            return self.data[numero]
 
     def add_ligne(self, ligne):
         """
@@ -245,15 +245,23 @@ class Dataframe :
         for i in numero :
             if (i > len(self.data) or i < 0) is True:
                 test = False
-                print("Il n'y a pas de ligne correspondantes au numéro {i}")
+                print("Il n'y a pas de lignes correspondantes au numéro {i}")
         if test is True :
-            for key in numero:
-                self.data.pop(key)
-            nouvelle_taille = len(self.data)
-            clefs =[]
-            for i in range(nouvelle_taille):
-                clefs.append(i)
-            self.data=dict(zip(clefs, list(self.data.values())))         
+            if len(numero) == 1:
+                self.data.pop(numero[0])
+                nouvelle_taille = len(self.data)
+                clefs =[]
+                for i in range(nouvelle_taille):
+                    clefs.append(i)
+                self.data=dict(zip(clefs, list(self.data.values())))
+            else:
+                for key in numero:
+                    self.data.pop(key)
+                nouvelle_taille = len(self.data)
+                clefs =[]
+                for i in range(nouvelle_taille):
+                    clefs.append(i)
+                self.data=dict(zip(clefs, list(self.data.values())))         
 
     def get_item(self, numero, variable):
         id = None
