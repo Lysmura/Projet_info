@@ -37,9 +37,10 @@ class Dataframe :
     modif_item(numero : int, variable : str, nouvelle_valeur : {str, int, float}
         actualise une valeur du dataframe
     """
-    def init(nom, header, data):
+    def __init__(self, nom, header, data):
         """
-        Créer un dataframe constitué d'un dictionnaire contenant chaque ligne, et d'une liste des variables
+        Créer un dataframe constitué d'un dictionnaire 
+        contenant chaque ligne, et d'une liste des variables
 
         Parameters:
         -----------
@@ -68,13 +69,14 @@ class Dataframe :
         return len(self.data)
 
     def __str__(self):
-        print("{self.nom}:")
+        str="{self.nom}: \n"
         variables=[]
         for i in len(self.header):
             variables.append(self.header[i][1])
         print(variables)
         for key, value in self.data.items():
             print(key, " ",value)
+        return str
 
     def col(self, nom_col):
         """
@@ -101,7 +103,7 @@ class Dataframe :
             print("Mauvais nom de colonne")
         else:
             for key,value in self.data.items():
-                col.append[value[id]]
+                col.append[self.data[key][id]]
         return col
 
     def add_col(self,nom, colonne):
@@ -121,7 +123,7 @@ class Dataframe :
         else:
             if isinstance(colonne[0], float) == True :
                 for i in colonne:
-                    if isinstance(i, float) == False :
+                    if isinstance(i, float) == False and i != 'mq' :
                         print("La valeur {i} n'est pas au bon format !")
                         raise TypeError
                         self.header.append([nom, "float"])
@@ -131,7 +133,7 @@ class Dataframe :
                     self.data[key] = temp
             if isinstance(colonne[0], int) == True :
                 for i in colonne:
-                    if isinstance(i, int) == False :
+                    if isinstance(i, int) == False and i != 'mq':
                         print("La valeur {i} n'est pas au bon format !")
                         raise TypeError
                 self.header.append([nom, "int"])
@@ -141,7 +143,7 @@ class Dataframe :
                     self.data[key] = temp
             if isinstance(colonne[0], str) == True :
                 for i in colonne:
-                    if isinstance(i, str) == False :
+                    if isinstance(i, str) == False and i != 'mq' :
                         print("La valeur {i} n'est pas au bon format !")
                         raise TypeError
                 self.header.append([nom, "str"])
@@ -214,15 +216,15 @@ class Dataframe :
         else:
             for i in len(self.header) :
                 if self.header[i][1] == "str":
-                    if isinstance(ligne[i], str) == False:
+                    if isinstance(ligne[i], str) == False and i != 'mq':
                         print("La valeur numéro {i} est au mauvais format.")
                         raise TypeError
                 if self.header[i][1] == "int":
-                    if isinstance(ligne[i], int) == False:
+                    if isinstance(ligne[i], int) == False and i != 'mq':
                         print("La valeur numéro {i} est au mauvais format.")
                         raise TypeError
                 if self.header[i][1] == "float":
-                    if isinstance(ligne[i], float) == False:
+                    if isinstance(ligne[i], float) == False and i != 'mq':
                         print("La valeur numéro {i} est au mauvais format.")
                         raise TypeError
             key = len(self.data)
@@ -245,7 +247,8 @@ class Dataframe :
                 test = False
                 print("Il n'y a pas de ligne correspondantes au numéro {i}")
         if test == True :
-            self.data.pop(key) for key in numero
+            for key in numero:
+                self.data.pop(key)
             nouvelle_taille = len(self.data)
             clefs =[]
             for i in range(nouvelle_taille):
@@ -253,7 +256,7 @@ class Dataframe :
             self.data=dict(zip(clefs, list(self.data.values())))
             
 
-    def get_item(self, numero, variable):
-        retourne une valeur du dataframe
-    def modif_item(numero, variable, nouvelle_valeur): 
-        actualise une valeur du dataframe
+    #def get_item(self, numero, variable):
+    #    retourne une valeur du dataframe
+    #def modif_item(numero, variable, nouvelle_valeur): 
+    #    actualise une valeur du dataframe

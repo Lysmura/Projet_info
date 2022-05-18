@@ -1,9 +1,9 @@
 from abc import ABCMeta
 
-class univarie(ABC, Stattistiques) :
+class univarie(ABC, Statistiques) :
     def __init__(self):
         pass
     
     @abstractmethod
-    def __operation(self,col):
+    def _operation(self,col):
         pass
