@@ -8,6 +8,9 @@ class Moyenne(Univaries):
     _operation(col) : float
         Retourne la valeur moyenne d'une variable numérique dans une colonne
     """
+    def __init__ (self,col):
+       super().__init__(col)
+    
     def _operation(self, col):
         try:
             if isinstance(col[0], int) == False and isinstance(col[0], float) == False :
