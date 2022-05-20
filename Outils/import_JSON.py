@@ -1,6 +1,7 @@
 import gzip
 import json
 from Outils.my_import import Import
+from Structure.Dataframe import Dataframe
 
 
 
@@ -32,7 +33,15 @@ class import_json(Import):
                     list_values.append("mq")
             new_data[index] = list_values
         
-        header = [(h,str) for h in header]
+        header = [[h,str] for h in header]
+        dict_temp = Dataframe('temporaire',header,new_data)
+        for j in range (len(header)):
+            col = dict_temp.col(header[j][0])
+            for i in range(len(col)):
+                if col[i] !='mq':
+                    header[j][1] = type(col[i])
+                    break
+
         return (header,new_data)
 
 
