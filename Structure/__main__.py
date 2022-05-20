@@ -1,4 +1,5 @@
 from Dataframe import *
+from Statistiques.Moyenne import *
 
 header=[["Race", "str"]]
 data={0:["Matin"], 1:["Jack Russel"], 2:["Corgi"]}

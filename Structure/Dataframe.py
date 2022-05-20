@@ -1,19 +1,22 @@
 class Dataframe :
     """
-    Définie le tableau de données
+    Définie un tableau de données supportant les formats STR, INT et FLOAT.
 
     Attributes:
     -----------
     nom : str
         intitulé du dataframe
     data : dict
-        ensemble des données de la table
+        ensemble des données de la table stocké dans un dictionnaire
+        dont la clef est un entier allant de 0 à n (n étant la longueur
+        de la table)
     header : list
-        noms des variables du dataframe et leur format
+        noms des variables du dataframe et leur format stocké dans une 
+        liste de listes à deux entrées sous forme de string
 
     Methods:
     --------
-    init(col : list, ligne : list, data : dict, header : list)
+    init(nom : str, header :list, data : dict)
         constructeur de la classe
     __len__() : INT
         retourne la longueur du dataframe
@@ -22,18 +25,18 @@ class Dataframe :
     ligne(numero) : list
         retourne un individu du dataframe
     col(nom : str) : list
-        retourne une liste contenant une colonne du dataframe
+        retourne une liste contenant une colonne du dataframe 
     del_col(nom : str)
         supprime une colonne du dataframe
-    add_col(nom : str, donnee : list)
-        ajoute une colonne du dataframe, elle dit avoir un nom ainsi que des données
+    add_col(nom : str, colonne : list)
+        ajoute une colonne au dataframe, elle doit avoir un nom ainsi que des données
     del_ligne(numero : list)
         supprime une ou plusieurs lignes du dataframe
     add_ligne(individu : list)
         ajoute une ligne du dataframe
     get_item(numero : int, variable:str): {str, int, float}
         retourne une valeur du dataframe
-    modif_item(numero : int, variable : str, nouvelle_valeur : {str, int, float}
+    modif_item(numero : int, variable : str, nouvelle_valeur : {str, int, float})
         actualise une valeur du dataframe
     """
     def __init__(self, nom, header, data):
@@ -264,6 +267,21 @@ class Dataframe :
                 self.data=dict(zip(clefs, list(self.data.values())))         
 
     def get_item(self, numero, variable):
+        """
+        Retourne un élément du dataframe
+
+        Parameters:
+        -----------
+        numero : int
+            numéro de la ligne où récupérer la valeur
+        variable : str
+            nom de la variable où récupérer la valeur
+
+        Returns:
+        --------
+        {int, str, float}
+            valeur de la case pour la variable et le numéro choisit
+        """
         id = None
         temp_id = 0
         for i in self.header :
@@ -276,6 +294,9 @@ class Dataframe :
             return self.data[numero][id]
 
     def header_names(self):
+        """
+        
+        """
         return [h[0] for h in self.header]
 
     #def modif_item(numero, variable, nouvelle_valeur):
