@@ -275,6 +275,8 @@ class Dataframe :
         else :
             return self.data[numero][id]
 
+    def header_names(self):
+        return [h[0] for h in self.header]
 
     #def modif_item(numero, variable, nouvelle_valeur):
     #    actualise une valeur du dataframe

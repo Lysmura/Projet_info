@@ -1,6 +1,6 @@
 import gzip
 import csv
-from my_import import Import
+from Outils.my_import import Import
 
 class import_csv(Import):
     def __init__(self,chemin, nom_fichier):
@@ -22,11 +22,9 @@ class import_csv(Import):
         for index, value in enumerate(data[1:]):
             new_data[index]=value
 
+        header = [(h,str) for h in header]
         return (header, new_data)
 
-header, data = import_csv('../synop.csv.gz-20220511/donnees_meteo','synop.201301.csv.gz').importing()
 
-print(data)
-print(header)
     
 
