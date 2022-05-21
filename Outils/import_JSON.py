@@ -1,21 +1,16 @@
 import gzip
 import json
-from Outils.my_import import Import
+from Outils.my_import import my_import
 from Structure.Dataframe import Dataframe
 
 
-
-class import_json(Import):
+class import_json(my_import):
     def __init__(self, chemin, nom_fichier):
         super().__init__(chemin, nom_fichier)
-    
-    def dataOutput(self):
-        with gzip.open(self.chemin + '/' + self.nom_fichier, mode='rt') as gzfile :
-            data = json.load(gzfile)
-        return data 
 
     def importing(self):
-        data=self.dataOutput()
+        with gzip.open(self.chemin + '/' + self.nom_fichier, mode='rt') as gzfile :
+            data = json.load(gzfile)
         list_header = []
         for d in data:
             for k in d['fields'].keys():
@@ -42,7 +37,11 @@ class import_json(Import):
                     header[j][1] = type(col[i])
                     break
 
-        return (header,new_data)
+        return header,new_data
+
+
+        
+
 
 
         
