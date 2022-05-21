@@ -1,9 +1,9 @@
 import gzip
 import csv
-from Outils.my_import import Import
+from Outils.my_import import my_import
 from Structure.Dataframe import Dataframe
 
-class import_csv(Import):
+class import_csv(my_import):
     def __init__(self,chemin, nom_fichier):
         super().__init__(chemin, nom_fichier)
 
