@@ -1,6 +1,7 @@
-class Import_export:
+from abc import ABC ,abstractmethod
+class import_export(ABC):
     def __init__(self, chemin , nom_fichier):
-        self.chemin = Import_export.fix_chemin(chemin)
+        self.chemin = import_export.fix_chemin(chemin)
         self.nom_fichier = nom_fichier
 
     @staticmethod
