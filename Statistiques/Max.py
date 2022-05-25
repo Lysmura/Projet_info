@@ -1,7 +1,7 @@
-import Statistiques.Univaries as Univaries
+import Statistiques.univaries as univaries
 import unittest
 
-class Max(Univaries):
+class Max(univaries):
     """
     Calcule la valeur maximum d'une colonne choisit
 
@@ -13,6 +13,9 @@ class Max(Univaries):
     Exemples:
     ---------
     """
+    def __init__ (self,col):
+        super().__init__(col)
+
     def _operation(self, col):
         if isinstance(col[0], int) is False and isinstance(col[0], float) is False :
                 raise ValueError("Le format de la variable n'est pas bon")

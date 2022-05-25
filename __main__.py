@@ -1,5 +1,5 @@
 from Structure.Dataframe import Dataframe
-from Statistiques.Moyenne import Moyenne
+from Statistiques.moyenne import Moyenne
 #from Statistiques.Max import Max
 
 data={1:[1, 1.5], 2:[3, 3.4]}

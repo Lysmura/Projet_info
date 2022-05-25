@@ -1,7 +1,6 @@
-from multiprocessing import reduction
-import Statistiques.Univaries as Univaries
+from Statistiques.univaries import Univaries
 
-class Min(Univaries):
+class Min(univaries):
     """
     Calcule la valeur minimum d'une colonne choisit
 
@@ -9,6 +8,9 @@ class Min(Univaries):
     _operation(col) : var
         Retourne la valeur minimum d'une variable numérique dans une colonne
     """
+    def __init__ (self,col):
+        super().__init__(col)
+
     def _operation(self, col):
         try:
             if isinstance(col[0], int) == False and isinstance(col[0], float) == False :
