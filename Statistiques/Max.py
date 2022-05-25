@@ -1,4 +1,5 @@
-from Statistiques.univaries import Univaries
+from Statistiques.Univaries import Univaries
+import unittest
 
 class Max(Univaries):
     """
@@ -12,7 +13,7 @@ class Max(Univaries):
     Exemples:
     ---------
     """
-    def __init__ (self, col):
+    def __init__(self,col):
         super().__init__(col)
 
     def _operation(self):
@@ -23,7 +24,6 @@ class Max(Univaries):
         else :
             max = self.col[0]
             for i in self.col:
-                if i != 'mq':
-                    if i > max :
-                        max = i
+                if i > max :
+                    max = i
             return max 

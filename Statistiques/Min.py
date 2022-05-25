@@ -1,4 +1,4 @@
-from Statistiques.univaries import Univaries
+from Statistiques.Univaries import Univaries
 
 class Min(Univaries):
     """
@@ -8,7 +8,7 @@ class Min(Univaries):
     _operation(col) : var
         Retourne la valeur minimum d'une variable numérique dans une colonne
     """
-    def __init__ (self,col):
+    def __init__(self,col):
         super().__init__(col)
 
     def _operation(self):
@@ -22,7 +22,6 @@ class Min(Univaries):
         else:
             min = self.col[0]
             for i in self.col:
-                if i != 'mq':
-                    if i < min:
-                        min = i
+                if i < min :
+                    min = i
             return min 

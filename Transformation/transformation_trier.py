@@ -1,3 +1,5 @@
+from Transformation.transformation_transformation import Transformation
+
 class trier(Transformation):
     def __init__(self,df,var):
         try:

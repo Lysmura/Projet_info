@@ -1,5 +1,6 @@
 from math import sqrt
-from Statistiques.univaries import Univaries
+from Statistiques.Moyenne import Moyenne
+from Statistiques.Univaries import Univaries
 
 class Ecart_type(Univaries):
     """
@@ -10,7 +11,7 @@ class Ecart_type(Univaries):
         Retourne la valeur de l'écart type pour une colonne de variables 
         numériques.
     """
-    def __init__ (self,col):
+    def __init__(self,col):
         super().__init__(col)
 
     def _operation(self):
@@ -20,17 +21,10 @@ class Ecart_type(Univaries):
         except ValueError as ve:
             print(ve)
 
-        moyenne = 0
-        n=0
-        for i in self.col:
-            if i != 'mq':
-                moyenne = moyenne + i
-                n = n + 1
-        moyenne = moyenne/n
-
+        moyenne = Moyenne(self.col)._operation()
         ecart_type = 0
         for i in self.col:
             if i != 'mq':
-                ecart_type += i - moyenne
-        ecart_type = sqrt(ecart_type/n)
+                ecart_type += (i - moyenne)**2
+        ecart_type = sqrt(ecart_type/len(self.col))
         return ecart_type

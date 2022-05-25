@@ -1,5 +1,5 @@
-from transformation_transformation import Transformation
-from structure.dataframe import Dataframe
+from Transformation.transformation_transformation import Transformation
+from Structure.Dataframe import Dataframe
 
 
 class Join(Transformation):
