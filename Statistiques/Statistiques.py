@@ -1,8 +1,6 @@
 #import numpy as np
 #import scypy 
 #import matplotlib as mp
-from abc import ABC
-
-class Statistiques(ABC) :
+class Statistiques() :
     def __init__(self):
         pass

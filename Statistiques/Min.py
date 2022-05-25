@@ -1,6 +1,6 @@
 from Statistiques.univaries import Univaries
 
-class Min(univaries):
+class Min(Univaries):
     """
     Calcule la valeur minimum d'une colonne choisit
 
@@ -17,11 +17,12 @@ class Min(univaries):
                 raise ValueError("Le format de la variable n'est pas bon")
         except ValueError as ve:
             print(ve)
-        if len(col) == 0:
+        if len(self.col) == 0:
             return None
         else:
             min = self.col[0]
             for i in self.col:
-                if i < min and i != 'mq' :
-                    min = i
+                if i != 'mq':
+                    if i < min:
+                        min = i
             return min 

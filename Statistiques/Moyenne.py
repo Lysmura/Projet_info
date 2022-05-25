@@ -1,4 +1,4 @@
-from univaries import Univaries
+from Statistiques.univaries import Univaries
 
 class Moyenne(Univaries):
     """
@@ -18,6 +18,7 @@ class Moyenne(Univaries):
         except ValueError as ve:
             print(ve)
         moyenne = 0
+        n=0
         for i in self.col:
             if i != 'mq':
                 moyenne = moyenne + i

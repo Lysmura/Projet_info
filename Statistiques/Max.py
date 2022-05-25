@@ -1,7 +1,6 @@
-import Statistiques.univaries as univaries
-import unittest
+from Statistiques.univaries import Univaries
 
-class Max(univaries):
+class Max(Univaries):
     """
     Calcule la valeur maximum d'une colonne choisit
 
@@ -24,6 +23,7 @@ class Max(univaries):
         else :
             max = self.col[0]
             for i in self.col:
-                if i > max and i != 'mq':
-                    max = i
+                if i != 'mq':
+                    if i > max :
+                        max = i
             return max 
