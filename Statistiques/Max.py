@@ -13,17 +13,17 @@ class Max(univaries):
     Exemples:
     ---------
     """
-    def __init__ (self,col):
+    def __init__ (self, col):
         super().__init__(col)
 
-    def _operation(self, col):
-        if isinstance(col[0], int) is False and isinstance(col[0], float) is False :
+    def _operation(self):
+        if isinstance(self.col[0], int) is False and isinstance(self.col[0], float) is False :
                 raise ValueError("Le format de la variable n'est pas bon")
-        if len(col) == 0:
+        if len(self.col) == 0:
             return None
         else :
-            max = col[0]
-            for i in col:
-                if i > max :
+            max = self.col[0]
+            for i in self.col:
+                if i > max and i != 'mq':
                     max = i
             return max 

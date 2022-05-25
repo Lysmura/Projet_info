@@ -11,17 +11,17 @@ class Min(univaries):
     def __init__ (self,col):
         super().__init__(col)
 
-    def _operation(self, col):
+    def _operation(self):
         try:
-            if isinstance(col[0], int) == False and isinstance(col[0], float) == False :
+            if isinstance(self.col[0], int) == False and isinstance(self.col[0], float) == False :
                 raise ValueError("Le format de la variable n'est pas bon")
         except ValueError as ve:
             print(ve)
         if len(col) == 0:
             return None
         else:
-            min = col[0]
-            for i in col:
-                if i < min :
+            min = self.col[0]
+            for i in self.col:
+                if i < min and i != 'mq' :
                     min = i
             return min 
