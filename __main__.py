@@ -1,4 +1,4 @@
-from Structure.Dataframe import Dataframe
+from Structure.dataframe import Dataframe
 from Statistiques.moyenne import Moyenne
 #from Statistiques.Max import Max
 
