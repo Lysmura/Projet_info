@@ -1,4 +1,4 @@
-from Statistiques import Statistiques
+from Statistiques.statistiques import Statistiques
 from abc import ABC, abstractmethod
 class Bivaries(Statistiques,ABC):
     def __init__(self, col_x, col_y):
