@@ -1,5 +1,4 @@
-from Dataframe import *
-from Statistiques.moyenne import *
+from Structure.dataframe import Dataframe
 
 header=[["Race", "str"]]
 data={0:["Matin"], 1:["Jack Russel"], 2:["Corgi"]}
@@ -14,3 +13,5 @@ chiens.add_ligne(["Levrier Afghan", 17])
 #print(chiens.header)
 #chiens.del_ligne([2])
 print(chiens)
+
+print(Dataframe("chiens", [["Race", "str"], ["Poids", "float"]], {0:["Matin", 60.4], 1:["Jack Russel", 7], 2:["Corgi", 10.4], 3:["Levrier Afghan", 'mq']}))
