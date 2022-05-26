@@ -25,4 +25,4 @@ class Min(Univaries):
                 if i != 'mq':
                     if i < min :
                         min = i
-            return min 
+            return min

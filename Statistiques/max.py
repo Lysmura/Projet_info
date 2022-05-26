@@ -1,5 +1,4 @@
 from Statistiques.univaries import Univaries
-import unittest
 
 class Max(Univaries):
     """
@@ -18,7 +17,7 @@ class Max(Univaries):
 
     def _operation(self):
         if isinstance(self.col[0], int) is False and isinstance(self.col[0], float) is False :
-                raise ValueError("Le format de la variable n'est pas bon")
+            raise ValueError("Le format de la variable n'est pas bon")
         if len(self.col) == 0:
             return None
         else :
@@ -27,4 +26,4 @@ class Max(Univaries):
                 if i != 'mq':
                     if i > max :
                         max = i
-            return max 
+            return max
