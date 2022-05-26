@@ -1,4 +1,4 @@
-from Statistiques.Univaries import Univaries
+from Statistiques.univaries import Univaries
 import unittest
 
 class Max(Univaries):
@@ -24,6 +24,7 @@ class Max(Univaries):
         else :
             max = self.col[0]
             for i in self.col:
-                if i > max :
-                    max = i
+                if i != 'mq':
+                    if i > max :
+                        max = i
             return max 

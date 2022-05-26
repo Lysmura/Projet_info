@@ -1,4 +1,4 @@
-from Statistiques.Univaries import Univaries
+from Statistiques.univaries import Univaries
 
 class Min(Univaries):
     """
@@ -22,6 +22,7 @@ class Min(Univaries):
         else:
             min = self.col[0]
             for i in self.col:
-                if i < min :
-                    min = i
+                if i != 'mq':
+                    if i < min :
+                        min = i
             return min 

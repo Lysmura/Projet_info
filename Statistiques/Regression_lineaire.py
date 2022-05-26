@@ -1,5 +1,4 @@
 from Bivaries import Bivaries
-from scipy import stats 
 class Regression_lineaire(Bivaries):
 
     def __init__(self, col_x, col_y):

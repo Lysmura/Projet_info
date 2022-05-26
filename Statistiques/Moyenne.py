@@ -1,4 +1,4 @@
-from Statistiques.Univaries import Univaries
+from Statistiques.univaries import Univaries
 
 class Moyenne(Univaries):
     """
@@ -13,13 +13,15 @@ class Moyenne(Univaries):
     
     def _operation(self):
         try:
-            if isinstance(self.col[0], int) == False and isinstance(self.col[0], float) == False :
+            if isinstance(self.col[0], int) is False and isinstance(self.col[0], float) is False :
                 raise ValueError("Le format de la variable n'est pas bon")
         except ValueError as ve:
             print(ve)
         moyenne = 0
+        n = 0
         for i in self.col:
             if i != 'mq':
                 moyenne = moyenne + i
-        moyenne = moyenne/len(self.col)
+                n = n + 1
+        moyenne = moyenne/n
         return moyenne
