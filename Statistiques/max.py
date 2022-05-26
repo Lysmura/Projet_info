@@ -12,7 +12,7 @@ class Max(Univaries):
     Exemples:
     ---------
     """
-    def __init__(self,col):
+    def __init__(self, col):
         super().__init__(col)
 
     def _operation(self):

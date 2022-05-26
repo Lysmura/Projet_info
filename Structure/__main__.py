@@ -14,4 +14,6 @@ chiens.add_ligne(["Levrier Afghan", 17])
 #chiens.del_ligne([2])
 print(chiens)
 
-print(Dataframe("chiens", [["Race", "str"], ["Poids", "float"]], {0:["Matin", 60.4], 1:["Jack Russel", 7], 2:["Corgi", 10.4], 3:["Levrier Afghan", 'mq']}))
+chiens = Dataframe("chiens", [["Race", "str"], ["Poids", "float"]], {0:["Matin", 60.4], 1:["Jack Russel", 7], 2:["Corgi", 10.4], 3:["Levrier Afghan", 'mq']})
+
+print(chiens.col("Poids"))

@@ -15,7 +15,7 @@ class Ecart_type(Univaries):
 
     def _operation(self):
         try:
-            if isinstance(self.col[0], int) == False and isinstance(self.col[0], float) == False :
+            if isinstance(self.col[0], int) is False and isinstance(self.col[0], float) is False :
                 raise ValueError("Le format de la variable n'est pas bon")
         except ValueError as ve:
             print(ve)

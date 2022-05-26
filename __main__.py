@@ -5,5 +5,4 @@ from Statistiques.moyenne import Moyenne
 data={1:[1, 1.5], 2:[3, 3.4]}
 header=[["1", "int"],["2","float"]]
 temp = Dataframe("temp", header, data)
-
-Moyenne._operation(temp.col("1"))
+print(Moyenne(temp.col("1"))._operation())
