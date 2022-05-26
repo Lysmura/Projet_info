@@ -9,8 +9,8 @@ class Moyenne(Univaries):
         Retourne la valeur moyenne d'une variable numérique dans une colonne
     """
     def __init__ (self,col):
-       super().__init__(col)
-    
+        super().__init__(col)
+
     def _operation(self):
         try:
             if isinstance(self.col[0], int) is False and isinstance(self.col[0], float) is False :
