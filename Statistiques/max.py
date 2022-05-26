@@ -6,7 +6,7 @@ class Max(Univaries):
 
     Methods:
     --------
-    operation(col) : var
+    _operation(col) : var
         Retourne la valeur maximum d'une variable numérique dans une colonne
 
     Exemples:
@@ -15,7 +15,7 @@ class Max(Univaries):
     def __init__(self,col):
         super().__init__(col)
 
-    def operation(self):
+    def _operation(self):
         if isinstance(self.col[0], int) is False and isinstance(self.col[0], float) is False :
             raise ValueError("Le format de la variable n'est pas bon")
         if len(self.col) == 0:

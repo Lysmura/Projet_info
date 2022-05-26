@@ -5,13 +5,14 @@ class Min(Univaries):
     Calcule la valeur minimum d'une colonne choisit
 
     Methods:
-    operation(col) : var
+    --------
+    _operation(col) : var
         Retourne la valeur minimum d'une variable numérique dans une colonne
     """
     def __init__(self,col):
         super().__init__(col)
 
-    def operation(self):
+    def _operation(self):
         try:
             if isinstance(self.col[0], int) == False and isinstance(self.col[0], float) == False :
                 raise ValueError("Le format de la variable n'est pas bon")

@@ -1,5 +1,5 @@
 from transformation_transformation import Transformation
-from Structure.Dataframe import Dataframe
+from Structure.dataframe import Dataframe
 
 class Groupby(Transformation):
     def __init__(self,df,var):

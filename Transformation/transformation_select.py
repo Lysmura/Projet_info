@@ -1,5 +1,5 @@
 from Transformation.transformation_transformation import Transformation
-from Structure.Dataframe import Dataframe
+from Structure.dataframe import Dataframe
 import copy
 
 class Select(Transformation):

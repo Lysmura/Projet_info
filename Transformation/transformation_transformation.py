@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from Structure.Dataframe import Dataframe
+from Structure.dataframe import Dataframe
 
 
 class Transformation(ABC):
