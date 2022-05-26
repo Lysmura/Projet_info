@@ -7,5 +7,5 @@ class Bivaries(Statistiques, ABC):
         self.col_y = col_y
 
     @abstractmethod
-    def _operation(self):
+    def operation(self):
         pass

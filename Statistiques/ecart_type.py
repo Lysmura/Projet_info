@@ -6,14 +6,14 @@ class Ecart_type(Univaries):
     Calcule l'écart type d'une colonne choisit
 
     Methods:
-    _operation(col) : float
+    operation(col) : float
         Retourne la valeur de l'écart type pour une colonne de variables 
         numériques.
     """
     def __init__(self, col):
         super().__init__(col)
 
-    def _operation(self):
+    def operation(self):
         try:
             if isinstance(self.col[0], int) == False and isinstance(self.col[0], float) == False :
                 raise ValueError("Le format de la variable n'est pas bon")

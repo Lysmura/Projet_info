@@ -12,12 +12,12 @@ class Univaries(ABC, Statistiques) :
 
     Methods:
     --------
-    _operation(col) : float
+    operation(col) : float
         Retourne une statistique d'une variable dans une colonne
     """
     def __init__(self, col):
         self.col = col
 
     @abstractmethod
-    def _operation(self):
+    def operation(self):
         pass

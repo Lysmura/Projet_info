@@ -1,4 +1,4 @@
-from Structure.dataframe import Dataframe
+from dataframe import Dataframe
 
 header=[["Race", "str"]]
 data={0:["Matin"], 1:["Jack Russel"], 2:["Corgi"]}
