@@ -6,6 +6,7 @@ class Ecart_type(Univaries):
     Calcule l'écart type d'une colonne choisit
 
     Methods:
+    -------
     _operation(col) : float
         Retourne la valeur de l'écart type pour une colonne de variables 
         numériques.

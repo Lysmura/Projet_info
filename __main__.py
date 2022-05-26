@@ -1,8 +1,8 @@
 from Structure.dataframe import Dataframe
 from Statistiques.moyenne import Moyenne
+from Statistiques.compter import Compter
 #from Statistiques.Max import Max
 
-data={1:[1, 1.5], 2:[3, 3.4]}
-header=[["1", "int"],["2","float"]]
-temp = Dataframe("temp", header, data)
-print(Moyenne(temp.col("1"))._operation())
+chiens = Dataframe("chiens", [["Race", "str"], ["Poids", "float"]],
+        {0:["Matin", 60], 1:["Jack Russel", 7], 2:["Corgi", 10.1], 3:["Jack Russel", 'mq'], 4:["mq", 'mq']})
+print(Compter(chiens.col("Race"), True)._operation())
