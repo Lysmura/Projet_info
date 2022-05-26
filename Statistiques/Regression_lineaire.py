@@ -1,6 +1,6 @@
-from Bivaries import Bivaries
-class Regression_lineaire(Bivaries):
+from bivaries import Bivaries
 
+class Regression_lineaire(Bivaries):
     def __init__(self, col_x, col_y):
         super.__init__(col_x, col_y)
         self.Results = stats.linregress(x=self.col_x, y=self.col_y)
