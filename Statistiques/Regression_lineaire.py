@@ -10,7 +10,7 @@ class Regression_lineaire(Bivaries):
         self.beta0 = self.Results.intercept
         self.beta1 = self.Results.slope
         self.erreur = self.Results.stderr
-
+        self.R2 = self.Results.rvalue**2
 
     def _operation(self):
         plt.plot(self.col_x, self.col_y, 'o', label='Data')
