@@ -1,7 +1,7 @@
 import gzip
 import csv
 from Outils.my_import import my_import
-from Structure.Dataframe import Dataframe
+from Structure.dataframe import Dataframe
 
 class import_csv(my_import):
     def __init__(self,chemin, nom_fichier):
@@ -41,6 +41,7 @@ class import_csv(my_import):
                     header[i][1] = float
                     for key, value in new_data.items():
                         if value[i] != 'mq':
-                            if len(value[i])!=0:
+                            if len(value[i])!=0 :
                                 new_data[key][i] = float(value[i])
+
         return header, new_data

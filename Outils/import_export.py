@@ -1,5 +1,4 @@
-from abc import ABC ,abstractmethod
-class import_export(ABC):
+class import_export:
     def __init__(self, chemin , nom_fichier):
         self.chemin = import_export.fix_chemin(chemin)
         self.nom_fichier = nom_fichier

@@ -1,6 +1,6 @@
 from unicodedata import name
 from Outils.export_CSV import Export_CSV
-from Structure.Dataframe import Dataframe
+from Structure.dataframe import Dataframe
 
 data={0:[1, 1.5, "h"], 1:[3, 3.4,"l"], 2:[5, 6, "m"]}
 header=[["in", "int"],["fl","float"], ["st", "str"]]

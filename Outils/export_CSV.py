@@ -1,6 +1,6 @@
 import csv
 from Outils.my_export import my_export
-from Structure.Dataframe import Dataframe
+from Structure.dataframe import Dataframe
 
 class Export_CSV(my_export):
     def __init__(self, chemin : str, nom_fichier, dataframe : Dataframe ):
@@ -16,3 +16,4 @@ class Export_CSV(my_export):
             writer.writerow(dataframe.header_names())
             for i in range(len(dataframe)): 
                 writer.writerow(dataframe.ligne(i))
+

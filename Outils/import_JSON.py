@@ -1,15 +1,14 @@
 import gzip
 import json
 from Outils.my_import import my_import
-from Structure.Dataframe import Dataframe
-
+from Structure.dataframe import Dataframe
 
 class import_json(my_import):
     def __init__(self, chemin, nom_fichier):
         super().__init__(chemin, nom_fichier)
 
     def importing(self):
-        with gzip.open(self.chemin + '/' + self.nom_fichier, mode='rt') as gzfile :
+        with gzip.open(self.chemin + '/' + self.nom_fichier, mode='rt',encoding="utf-8") as gzfile :
             data = json.load(gzfile)
         list_header = []
         for d in data:
@@ -17,7 +16,7 @@ class import_json(my_import):
                 list_header.append(k)
 
         header = list(set(list_header))
-        
+
         new_data ={}
         for index, dic in enumerate(data):
             list_values=[]
@@ -30,6 +29,7 @@ class import_json(my_import):
         
         header = [[h,str] for h in header]
         dict_temp = Dataframe('temporaire',header,new_data)
+        
         for j in range (len(header)):
             col = dict_temp.col(header[j][0])
             for i in range(len(col)):
