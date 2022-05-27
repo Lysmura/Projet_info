@@ -1,8 +1,8 @@
 from Statistiques.Ecart_type import Ecart_type
-from Statistiques.Moyenne import Moyenne
-from Statistiques.Min import Min
-from Statistiques.Max import Max
-from Structure.Dataframe import Dataframe
+from Statistiques.moyenne import Moyenne
+from Statistiques.min import Min
+from Statistiques.max import Max
+from Structure.dataframe import Dataframe
 from Transformation.transformation_transformation import Transformation
 
 class Standardiser(Transformation):
