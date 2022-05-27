@@ -2,7 +2,7 @@ from Outils.import_CSV import import_csv
 from Structure.dataframe import Dataframe
 from Transformation.transformation_select import Select
 
-header, data = import_csv('synop.csv.gz-20220511\donnees_meteo','synop.201301.csv.gz').importing()
+header, data = import_csv('Data/synop.csv.gz-20220511/donnees_meteo','synop.201301.csv.gz').importing()
 print(header)
 data_1 = Dataframe('data',header,data)
 #test du select
