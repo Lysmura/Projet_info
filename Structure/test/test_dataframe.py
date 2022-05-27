@@ -26,7 +26,8 @@ class Test_Dataframe(unittest.TestCase):
                                 4:["Levrier Afghan", 27]})
 
     def test_add_col(self):
-        chiens = self.chiens1.add_col("Poids", [60.0, 7, 10.1, 20])
+        chiens = self.chiens1
+        chiens.add_col("Poids", [60.0, 7, 10.1, 20])
         self.assertEqual(chiens, self.chiens2)
 
     def test_add_ligne(self):
