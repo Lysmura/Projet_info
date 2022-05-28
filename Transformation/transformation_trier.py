@@ -3,7 +3,6 @@ from Structure.dataframe import Dataframe
 from Transformation.transformation_group_by import Groupby
 from utilities.tri import tri
 
-
 class trier(Transformation):
     def __init__(self,df,var):
         try:
