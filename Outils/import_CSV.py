@@ -40,12 +40,13 @@ class import_csv(my_import):
                             break
                     if test_2 and test_3:
                         header[i][1] = str
-                    if test_1:
-                        header[i][1] = float
-                        for key, value in new_data.items():
-                            if value[i] != 'mq':
-                                if len(value[i])!=0 :
-                                    new_data[key][i] = float(value[i])
+                    if not (test_2 and test_3):    
+                        if test_1:
+                            header[i][1] = float
+                            for key, value in new_data.items():
+                                if value[i] != 'mq':
+                                    if len(value[i])!=0 :
+                                        new_data[key][i] = float(value[i])
             
         if self.nom_fichier[-1] == 'v':
             with open( self.chemin + '/' + self.nom_fichier , encoding="utf-8") as csvfile :
