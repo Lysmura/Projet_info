@@ -25,7 +25,6 @@ class Export_carte(my_export):
         for i in range(dataframe.__len__()):
             data.update({region[i]:col_variable[i]})
 
-
         fig = cp.plot_reg_map(data = data,x_lim=(-6, 10), y_lim=(41, 52))
         fig.show()
         fig.savefig(self.chemin+"/"+self.nom_fichier)

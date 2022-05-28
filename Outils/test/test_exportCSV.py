@@ -1,4 +1,3 @@
-from unicodedata import name
 from Outils.export_CSV import Export_CSV
 from Structure.dataframe import Dataframe
 
