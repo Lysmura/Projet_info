@@ -23,29 +23,27 @@ class Regression_lineaire(Bivaries):
             droite de regression
         """
         super().__init__(col_x, col_y)
-        self.Results = stats.linregress(x=self.col_x, y=self.col_y)
+        x = col_x
+        y = col_y
+        for i, elem in enumerate(y):
+            if elem == "mq" :
+                del x[i]
+                del y[i]
+        for i, elem in enumerate(x):
+            if elem == "mq" :
+                del x[i]
+                del y[i]
+        self.x_col = x
+        self.y_col = y
+        self.Results = stats.linregress(x=self.x_col, y=self.y_col)
         self.beta0 = self.Results.intercept
         self.beta1 = self.Results.slope
         self.erreur = self.Results.stderr
         self.R2 = self.Results.rvalue**2
 
     def _operation(self):
-        x = self.col_x
-        y = self.col_y
-        eleme_supp = []
-        for indice in range(len(x)) :
-            if x[indice] == "mq":
-                eleme_supp.append[indice]
-        del x[eleme_supp]
-        del y[eleme_supp]
-        eleme_supp = []
-        for indice in range(len(y)) :
-            if y[indice] == "mq":
-                eleme_supp.append[indice]
-        del x[eleme_supp]
-        del y[eleme_supp]
-        plt.plot(self.col_x, self.col_y, 'o', label='Data')
-        droite_y = [ self.beta0 + self.beta1*x for x in self.col_x]
-        plt.plot(self.col_x, droite_y, 'r', label='Droite de regression')
+        plt.plot(self.x_col, self.y_col, 'o', label='Data')
+        droite_y = [ self.beta0 + self.beta1*x for x in self.x_col]
+        plt.plot(self.x_col, droite_y, 'r', label='Droite de regression')
         plt.legend()
         plt.show()
