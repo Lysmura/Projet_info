@@ -5,27 +5,9 @@ from utilities.tri import tri
 
 class trier(Transformation):
     def __init__(self,df,var):
-        try:
-            if isinstance(df, Dataframe) == False:
-                raise TypeError("l'argument df doit être un dataframe")
-        except TypeError as te:
-            print(te)
-        self.__df = df
-        try:
-            test = True
-            id = None
-            size = len(df.header)
-            for i in range(size):
-                if df.header[i][0] == var:
-                    test = False
-                    id = i
-            if test :
-                raise IndexError("la variable est mal orthographié ou n'appartient pas au dataframe indiqué")
-        except IndexError as ie:
-            print(ie)
-        self.__var= [var,id]
+        super().__init__(df,var)
     
-    def transform(self):
+    def _operation(self):
         col_trier = tri().tri_fusion(self.__df.col(self.__var[0]))
         compteur= 1
         dict_trier={}
@@ -35,11 +17,11 @@ class trier(Transformation):
             else:
                 dict_trier.update({element:[compteur]})
             compteur +=1
-        trans_df = Groupby(self.__df,self.__var).transform()
-        for key,value in trans_df.items():
-            id = self.__var[1]
+        trans_df = Groupby(self.df_1,self.var)._operation()
+        for key,value in trans_df.data.items():
+            id = self.df_1.num_col(self.var[0])
             for element in value:
                 new_key = dict_trier[element[id]][-1]
                 trans_df.update({new_key:element})
-            del trans_df[key]
+            del trans_df.data[key]
         return trans_df
