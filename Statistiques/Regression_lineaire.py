@@ -2,7 +2,7 @@ from Statistiques.bivaries import Bivaries
 from scipy import stats 
 import matplotlib.pyplot as plt
 
-class Regression_lineaire(Bivaries):
+class regression_lineaire(Bivaries):
 
     def __init__(self, col_x, col_y):
         super().__init__(col_x, col_y)
