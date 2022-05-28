@@ -300,9 +300,35 @@ class Dataframe :
 
     def header_names(self):
         """
-        
+        Retourne le nom des variables dans header
+
+        Returns :
+        ---------
+        list
+            liste contenant les noms des variables
         """
         return [h[0] for h in self.header]
 
-    #def modif_item(numero, variable, nouvelle_valeur):
-    #    actualise une valeur du dataframe
+    def modif_item(self,numero, variable, nouvelle_valeur):
+        """
+        Modifie une valeur du dataframe
+
+        Parameters :
+        -----------
+        numero : int
+            numero de la ligne
+        variable : str
+            nom de la colonne
+        nouvelle_valeur : {int, float, str}
+            valeur qui remplacera l'actuelle
+        """
+        id = None
+        temp_id = 0
+        for i in self.header :
+            if i[0] == variable:
+                id = temp_id
+            temp_id += 1
+        if id is None :
+            print("Mauvais nom de colonne")
+        else:
+            self.data[numero][id] = nouvelle_valeur
