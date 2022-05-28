@@ -1,7 +1,3 @@
-from datetime import date
-from multiprocessing.sharedctypes import Value
-
-from numpy import indices
 from Transformation.transformation_transformation import Transformation
 from Structure.dataframe import Dataframe
 from copy import deepcopy
