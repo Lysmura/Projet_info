@@ -1,11 +1,13 @@
 from Transformation.transformation_transformation import Transformation
 from Structure.dataframe import Dataframe
 from Transformation.transformation_group_by import Groupby
+from utilities.tri import tri
+
 
 class trier(Transformation):
     def __init__(self,df,var):
         try:
-            if isinstance(df,DataFrame) == False:
+            if isinstance(df, Dataframe) == False:
                 raise TypeError("l'argument df doit être un dataframe")
         except TypeError as te:
             print(te)
@@ -25,7 +27,7 @@ class trier(Transformation):
         self.__var= [var,id]
     
     def transform(self):
-        col_trier = tri_fusion(self.__df.col(self.__var[0]))
+        col_trier = tri().tri_fusion(self.__df.col(self.__var[0]))
         compteur= 1
         dict_trier={}
         for element in col_trier:
