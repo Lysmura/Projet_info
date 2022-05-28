@@ -1,4 +1,4 @@
-from Statistiques.Ecart_type import Ecart_type
+from Statistiques.ecart_type import Ecart_type
 from Statistiques.moyenne import Moyenne
 from Statistiques.min import Min
 from Statistiques.max import Max

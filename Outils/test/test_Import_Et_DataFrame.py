@@ -1,5 +1,6 @@
 from Outils.import_CSV import import_csv
 from Structure.dataframe import Dataframe
+import unittest
 
 
 def From_CSV_to_Dataframe():
@@ -8,13 +9,19 @@ def From_CSV_to_Dataframe():
     data_frame =Dataframe(nom="donnees_meteo", header = header, data = data)
     return data_frame
 
-data_frame = From_CSV_to_Dataframe()
+class Test_DataFrame(unittest.TestCase):
 
-print(data_frame.header)
+    def test_dataframe(self):
+        data_frame = From_CSV_to_Dataframe()
 
-#print(data_frame.col('numer_sta'))
-print(data_frame.ligne(3))
+        print(data_frame.header)
 
-print(len(data_frame))
+        #print(data_frame.col('numer_sta'))
+        print(data_frame.ligne(3))
 
-print(data_frame.get_item(3,'numer_sta'))
+        print(len(data_frame))
+
+        print(data_frame.get_item(3,'numer_sta'))
+
+if __name__ == '__main__':
+    unittest.main()
