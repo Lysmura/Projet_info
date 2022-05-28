@@ -8,19 +8,21 @@ class Test_Transfromation(unittest.TestCase):
         header, data = import_csv('Data/synop.csv.gz-20220511/donnees_meteo','synop.201301.csv.gz').importing()
         print(header)
         data_1 = Dataframe('data',header,data)
+        
         #test du select
-        new_data = Select(data_1,['dd',''])._operation()
+        from Transformation.transformation_select import Select
+        new_data = Select(data_1,['numer_sta','dd',''])._operation()
         print(new_data)
 
-        from Transformation.transformation_filter import Filter
         #test du filter
+        from Transformation.transformation_filter import Filter
         Tab_filter = Filter(new_data,['dd'],'>',230)._operation()
         print(Tab_filter)
 
-        from Transformation.transformation_standardiser import Standardiser
-        #test du standardiser
-        tab_centrer = Standardiser(Tab_filter,'standardiser',['dd'])._operation()
-        print(tab_centrer)
+        #test_group_by
+        from Transformation.transformation_group_by import Groupby
+        group = Groupby(Tab_filter,['numer_sta'])._operation()
+        print(group)
         
 if __name__ == '__main__':
     unittest.main()
