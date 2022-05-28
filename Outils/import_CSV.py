@@ -46,7 +46,7 @@ class import_csv(my_import):
                                     new_data[key][i] = float(value[i])
             
         if self.nom_fichier[-1] == 'v':
-            with open( self.chemin + '/' + self.nom_fichier , encoding='ISO-8859-1') as csvfile :
+            with open( self.chemin + '/' + self.nom_fichier , encoding="utf-8") as csvfile :
                 synopreader = csv.reader(csvfile, delimiter=';')
                 for row in synopreader :
                     data.append(row)
