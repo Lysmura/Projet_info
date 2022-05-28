@@ -39,16 +39,16 @@ class Test_Dataframe(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.chiens3.add_ligne([13, "Bulldog anglais"])
 
-    def test_del_col(self):
+    def test_del(self):
         chiens = self.chiens2
         chiens.del_col("Poids")
-        self.assertEqual(chiens.ligne(1), self.chiens1.ligne(1))
-
-
-#print(chiens.ligne(2))
-#print(chiens.get_item(2,"poids"))
-#print(chiens.header)
-#chiens.del_ligne([2])
+        chiens.del_ligne([2])
+        self.assertEqual([len(chiens), len(chiens.header)], [3,1])
+    
+    def test_modif_item(self):
+        chien = self.chiens2
+        chien.modif_item(2, "Race", "Corgi <3")
+        self.assertEqual(chien.ligne(2), ['Corgi <3', 10.1] )
 
 if __name__ == '__main__':
     unittest.main()
