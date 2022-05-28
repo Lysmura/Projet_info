@@ -108,8 +108,8 @@ class Dataframe :
         return col
 
     def num_col(self,nom_var):
-        for i in self.header:
-            if nom_var == i[0]:
+        for i in range(len(self.header)):
+            if nom_var == self.header[i][0]:
                 return i
                 
     def add_col(self,nom, colonne):
