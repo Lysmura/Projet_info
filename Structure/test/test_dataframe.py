@@ -4,7 +4,7 @@ from Structure.dataframe import Dataframe
 class Test_Dataframe(unittest.TestCase):
     def setUp(self):
         self.chiens1 = Dataframe("chiens",
-                                [["Race", "str"], ["Poids", "float"]],
+                                [["Race", "str"]],
                                 {0:["Matin"],
                                 1:["Jack Russel"],
                                 2:["Corgi"],
@@ -28,12 +28,12 @@ class Test_Dataframe(unittest.TestCase):
     def test_add_col(self):
         chiens = self.chiens1
         chiens.add_col("Poids", [60.0, 7, 10.1, 20])
-        self.assertEqual(chiens, self.chiens2)
+        self.assertEqual(chiens.col("Poids"), self.chiens2.col("Poids"))
 
     def test_add_ligne(self):
         chien = self.chiens2
         chien.add_ligne(["Levrier Afghan", 27])
-        self.assertEqual(chien, self.chiens3)
+        self.assertEqual(chien.ligne(4), self.chiens3.ligne(4))
 
     def test_mauvais_add_ligne(self):
         with self.assertRaises(TypeError):
@@ -42,7 +42,7 @@ class Test_Dataframe(unittest.TestCase):
     def test_del_col(self):
         chiens = self.chiens2
         chiens.del_col("Poids")
-        self.assertEqual(chiens, self.chiens1)
+        self.assertEqual(chiens.ligne(1), self.chiens1.ligne(1))
 
 
 #print(chiens.ligne(2))
