@@ -79,6 +79,12 @@ class Dataframe :
             affichage += "{} ".format(key) + str(value) + "\n"
         return affichage
 
+    def __eq__(self, other):
+        if self.header == other.header and self.nom == other.nom and self.data == other.data :
+            return True
+        else :
+            return False
+
     def col(self, nom_col):
         """
         Retourne une colonne

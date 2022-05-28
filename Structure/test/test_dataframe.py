@@ -28,12 +28,12 @@ class Test_Dataframe(unittest.TestCase):
     def test_add_col(self):
         chiens = self.chiens1
         chiens.add_col("Poids", [60.0, 7, 10.1, 20])
-        self.assertEqual(chiens.col("Poids"), self.chiens2.col("Poids"))
+        self.assertEqual(chiens, self.chiens2)
 
     def test_add_ligne(self):
         chien = self.chiens2
         chien.add_ligne(["Levrier Afghan", 27])
-        self.assertEqual(chien.ligne(4), self.chiens3.ligne(4))
+        self.assertEqual(chien, self.chiens3)
 
     def test_mauvais_add_ligne(self):
         with self.assertRaises(TypeError):
