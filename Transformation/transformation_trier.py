@@ -1,4 +1,6 @@
 from Transformation.transformation_transformation import Transformation
+from Structure.dataframe import Dataframe
+from Transformation.transformation_groupby import Groupby
 
 class trier(Transformation):
     def __init__(self,df,var):
