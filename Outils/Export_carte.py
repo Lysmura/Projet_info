@@ -1,4 +1,3 @@
-from pyparsing import col
 from Outils.my_export import my_export
 from Structure.dataframe import Dataframe
 from Outils.cartoplot import CartoPlot
