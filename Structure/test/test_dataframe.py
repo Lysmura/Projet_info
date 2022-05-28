@@ -13,14 +13,14 @@ class Test_Dataframe(unittest.TestCase):
         self.chiens2 = Dataframe("chiens",
                                 [["Race", "str"], ["Poids", "float"]],
                                 {0:["Matin", 60.0],
-                                1:["Jack Russel",7],
+                                1:["Jack Russel", 7],
                                 2:["Corgi", 10.1],
                                 3:["mq", 20]})
 
         self.chiens3 = Dataframe("chiens",
                                 [["Race", "str"], ["Poids", "float"]],
                                 {0:["Matin", 60.0],
-                                1:["Jack Russel",7],
+                                1:["Jack Russel", 7],
                                 2:["Corgi", 10.1],
                                 3:["mq", 20],
                                 4:["Levrier Afghan", 27]})
