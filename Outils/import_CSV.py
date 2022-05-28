@@ -23,6 +23,7 @@ class import_csv(my_import):
             dict_temp = Dataframe('temporaire',header,new_data)
             for i in range(len(header)):
                 col = dict_temp.col(header[i][0])
+                test_1 = True
                 test_2= False
                 test_3 = True
                 if isinstance(col[0],str):    
@@ -30,6 +31,7 @@ class import_csv(my_import):
                         taille = len(col[0])
                         if len(col[j]) >=1 and col[j][0] in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']:
                             header[i][1] = str
+                            test_1 =False
                             break
                         if len(col[j])>=2 and (col[j][0]=='0'and col[j][1] != '.') :
                             test_2 = True
@@ -38,7 +40,7 @@ class import_csv(my_import):
                             break
                     if test_2 and test_3:
                         header[i][1] = str
-                    else:
+                    if test_1:
                         header[i][1] = float
                         for key, value in new_data.items():
                             if value[i] != 'mq':
