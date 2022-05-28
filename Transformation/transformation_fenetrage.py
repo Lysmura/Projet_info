@@ -15,8 +15,9 @@ class Fenetrage(Transformation):
             self.__format_date = format_date
             self.__format_heure = format_heure
             self.__int_heure = int_heure
-
-        def jour(date,format_date):
+        
+        @staticmethod
+        def jour(date ,format_date):
             debut = 0
             for i in range(len(format_date)):
                 if format_date[i] == 'J':
@@ -28,6 +29,7 @@ class Fenetrage(Transformation):
             fin += debut
             return date[debut:fin+1]
 
+        @staticmethod
         def mois(date,format_date):
             debut = 0
             for i in range(len(format_date)):
@@ -53,6 +55,7 @@ class Fenetrage(Transformation):
             fin +=debut
             return date[debut:fin+1]
         
+        @staticmethod
         def reste_date(date,format_date):
             debut = -1
             debut = 0
