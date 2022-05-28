@@ -11,7 +11,7 @@ class Dataframe :
         dont la clef est un entier allant de 0 à n (n étant la longueur
         de la table)
     header : list
-        noms des variables du dataframe et leur format stocké dans une 
+        noms des variables du dataframe et leur format stocké dans une
         liste de listes à deux entrées sous forme de string
 
     Methods:
@@ -25,7 +25,7 @@ class Dataframe :
     ligne(numero) : list
         retourne un individu du dataframe
     col(nom : str) : list
-        retourne une liste contenant une colonne du dataframe 
+        retourne une liste contenant une colonne du dataframe
     del_col(nom : str)
         supprime une colonne du dataframe
     add_col(nom : str, colonne : list)
@@ -108,8 +108,8 @@ class Dataframe :
         return col
 
     def num_col(self,nom_var):
-        for i in range(len(self.header)):
-            if nom_var == self.header[i][0]:
+        for i in self.header:
+            if nom_var == i[0]:
                 return i
                 
     def add_col(self,nom, colonne):
