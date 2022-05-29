@@ -5,7 +5,7 @@ class Test_ImportCSV(unittest.TestCase):
     def test_csv(self):
         header, data = import_csv('Data/synop.csv.gz-20220511/donnees_meteo','synop.201301.csv.gz').importing()
         #header, data = import_csv('Data/synop.csv.gz-20220511','postesSynopAvecRegions.csv').importing()
-        print(data[0])
+        print(data)
         print(header)
 
 

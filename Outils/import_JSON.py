@@ -15,7 +15,7 @@ class import_json(my_import):
             for k in d['fields'].keys():
                 list_header.append(k)
 
-        header = list(set(list_header))
+        header = list(set(list_header)) #recuperer tous les noms de variables possibles
 
         new_data ={}
         for index, dic in enumerate(data):
@@ -24,7 +24,7 @@ class import_json(my_import):
                 if dic['fields'].get(h):
                     list_values.append(dic['fields'].get(h))
                 else: 
-                    list_values.append("mq")
+                    list_values.append("mq") #je comble le vide par les valeurs manquantes vu qu'ils ne sont pas visible dans le fichier json
             new_data[index] = list_values
         
         header = [[h,str] for h in header]

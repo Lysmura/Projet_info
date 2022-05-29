@@ -12,8 +12,7 @@ class Export_CSV(my_export):
         dataframe = self.dataframe
         with open(file_chemin, 'w', encoding='UTF8', newline='') as f:
             writer = csv.writer(f)
-            # write the header
-            writer.writerow(dataframe.header_names())
+            writer.writerow(dataframe.header_names()) # ecriture du header
             for i in range(len(dataframe)): 
                 writer.writerow(dataframe.ligne(i))
 
