@@ -1,23 +1,33 @@
-from transformation_transformation import Transformation
+from Transformation.transformation_transformation import Transformation
 from Structure.dataframe import Dataframe
+from copy import deepcopy
 
 class Groupby(Transformation):
     def __init__(self,df,var):
-        super.__init__(df,var)
+        super().__init__(df,var)
 
     def _operation(self):
-        id_var = self.__df_1.num_col(self.__var[0])
-        trans_df = Dataframe('group_by_' + self.__df.header[id_var][0],self.__df_1.header,{})
-        for key,value in self.__df.items():
+        id_var = self.df_1.num_col(self.var[0])
+        new_header =  deepcopy(self.df_1.header)
+        trans_df = Dataframe('group_by_' + self.df_1.header[id_var][0],new_header,{})
+        for key,value in self.df_1.data.items():
             cle_group_by = value[id_var]
-            if  cle_group_by not in trans_df:
-                trans_df.update({cle_group_by:[value]})
+            if  cle_group_by not in trans_df.data:
+                trans_df.data.update({cle_group_by:[value]})
             else:
-                trans_df[cle_group_by].append(value)
+                trans_df.data[cle_group_by].append(value)
         compteur = 0
-        for key in trans_df.keys():
-            trans_df[compteur] = trans_df[key]
+        for key in trans_df.data.keys():
+            trans_df.data[compteur] = trans_df.data[key]
             compteur +=1
-            del trans_df[key]
-        return trans_df
-
+            del trans_df.data[key]
+        table_group_by = []
+        for key,value in trans_df.data.items():
+            compteur = 0
+            data = {}
+            for element in value:
+                dict.update({compteur:element})
+                compteur +=1
+            table_group_by.append(Dataframe('table des {}'.format(value[id_var]),deepcopy(self.df_1.header),dict))
+            value = value[0]
+        return trans_df,table_group_by
