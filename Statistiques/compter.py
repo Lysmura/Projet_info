@@ -11,10 +11,12 @@ class Compter(Univaries):
     -----------
     freq : bool = True
         si True retourne la fréquence, par défaut False
+    col : list
+        colonne du dataframe
 
     Methods:
     --------
-    _operation(col) : float
+    _operation() : float
         Retourne la valeur de l'écart type pour une colonne de variables 
         numériques.
     """

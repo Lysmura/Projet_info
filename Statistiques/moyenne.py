@@ -3,9 +3,14 @@ from Statistiques.univaries import Univaries
 class Moyenne(Univaries):
     """
     Calcule la moyenne d'une colonne choisit
+    
+    Attributes:
+    -----------
+    col : list
+        colonne du dataframe
 
     Methods:
-    _operation(col) : float
+    _operation() : float
         Retourne la valeur moyenne d'une variable numérique dans une colonne
     """
     def __init__ (self, col):

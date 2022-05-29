@@ -4,9 +4,14 @@ class Min(Univaries):
     """
     Calcule la valeur minimum d'une colonne choisit
 
+    Attributes:
+    -----------
+    col : list
+        colonne du dataframe
+
     Methods:
     --------
-    _operation(col) : var
+    _operation() : var
         Retourne la valeur minimum d'une variable numérique dans une colonne
     """
     def __init__(self, col):
