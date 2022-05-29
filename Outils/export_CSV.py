@@ -27,7 +27,7 @@ class Export_CSV(my_export):
     def exporting(self):
         file_chemin = self.chemin+"/"+self.nom_fichier
         dataframe = self.dataframe
-        with open(file_chemin, 'w', encoding='UTF8', newline='') as f:
+        with open(file_chemin, 'w', encoding='UTF8', newline='') as f: #ouverture en mode ecriture
             writer = csv.writer(f)
             writer.writerow(dataframe.header_names()) # ecriture du header
             for i in range(len(dataframe)): 

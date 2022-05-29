@@ -41,7 +41,7 @@ class import_json(my_import):
                 if dic['fields'].get(h):
                     list_values.append(dic['fields'].get(h))
                 else: 
-                    list_values.append("mq") #je comble le vide par les valeurs manquantes vu qu'ils ne sont pas visible dans le fichier json
+                    list_values.append("mq") #il faut combler le vide par les valeurs manquantes vu qu'ils ne sont pas visible dans le fichier json
             new_data[index] = list_values
         
         header = [[h,str] for h in header]

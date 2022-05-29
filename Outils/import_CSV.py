@@ -10,7 +10,7 @@ class import_csv(my_import):
     -----------
     chemin : str
         chemin du fichier
-    nom_fichier : dict
+    nom_fichier : str
         Nom du fichier
 
     Methods:
