@@ -11,8 +11,7 @@ class moyenne_glissante(Transformation):
         col = self.df_1.col(self.var[0])
         for i in range(len(col)):
             try:
-                col[i] = Moyenne._operation(col[i-pas:i+1])
-                L += col[i]
+                L += [Moyenne(col[i-pas:i+1])._operation()]
             except IndexError:
                 pass
         return L
