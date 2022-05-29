@@ -4,6 +4,23 @@ from Outils.my_import import my_import
 from Structure.dataframe import Dataframe
 
 class import_json(my_import):
+    """
+    Cette classe permet d'importer un fichier json
+
+    Attributes:
+    -----------
+    chemin : str
+        chemin du fichier
+    nom_fichier : str
+        Nom du fichier
+
+    Methods:
+    --------
+    init(chemin : str, nom_chemin : str)
+        constructeur de la classe
+    importing():
+        La methode permet d'importer un fichier json
+    """
     def __init__(self, chemin, nom_fichier):
         super().__init__(chemin, nom_fichier)
 

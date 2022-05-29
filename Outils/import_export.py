@@ -4,7 +4,9 @@ class import_export:
         self.nom_fichier = nom_fichier
 
     @staticmethod
-    def fix_chemin(chemin): #cette methode statique permettra de regler le probleme des back et forward slash
+    def fix_chemin(chemin): 
+        '''cette methode statique permettra de regler le probleme des back et forward slash
+        '''
         nouveau_chemin=''
         for caractere in chemin:
             if caractere == "\\":

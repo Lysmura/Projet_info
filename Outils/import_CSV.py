@@ -1,9 +1,25 @@
 import gzip
 import csv
 from Outils.my_import import my_import
-from Structure.dataframe import Dataframe
 
 class import_csv(my_import):
+    """
+    Cette classe permet d'importer un fichier csv
+
+    Attributes:
+    -----------
+    chemin : str
+        chemin du fichier
+    nom_fichier : dict
+        Nom du fichier
+
+    Methods:
+    --------
+    init(chemin : str, nom_chemin : str)
+        constructeur de la classe
+    importing():
+        La methode permet à la fois d'importer un fichier csv et un fichier csv.gz
+    """
     def __init__(self,chemin, nom_fichier):
         super().__init__(chemin, nom_fichier)
 
