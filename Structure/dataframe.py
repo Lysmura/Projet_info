@@ -1,4 +1,4 @@
-class Dataframe :
+class Dataframe:
     """
     Définie un tableau de données supportant les formats STR, INT et FLOAT.
 
@@ -39,6 +39,7 @@ class Dataframe :
     modif_item(numero : int, variable : str, nouvelle_valeur : {str, int, float})
         actualise une valeur du dataframe
     """
+
     def __init__(self, nom, header, data):
         """
         Créer un dataframe constitué d'un dictionnaire
@@ -58,7 +59,6 @@ class Dataframe :
         self.header = header
         self.data = data
 
-
     def __len__(self):
         """
         Retourne le nombre de lignes du dataframe
@@ -71,7 +71,7 @@ class Dataframe :
         return len(self.data)
 
     def __str__(self):
-        affichage="{}: \n   ".format(self.nom)
+        affichage = "{}: \n   ".format(self.nom)
         for i in self.header:
             affichage += i[0] + "   "
         affichage += "\n"
@@ -80,9 +80,9 @@ class Dataframe :
         return affichage
 
     def __eq__(self, other):
-        if self.header == other.header and self.nom == other.nom and self.data == other.data :
+        if self.header == other.header and self.nom == other.nom and self.data == other.data:
             return True
-        else :
+        else:
             return False
 
     def col(self, nom_col):
@@ -102,23 +102,23 @@ class Dataframe :
         col = []
         id = None
         temp_id = 0
-        for i in self.header :
+        for i in self.header:
             if i[0] == nom_col:
                 id = temp_id
             temp_id += 1
-        if id is None :
+        if id is None:
             print("Mauvais nom de colonne")
         else:
             for value in self.data.values():
                 col.append(value[id])
         return col
 
-    def num_col(self,nom_var):
+    def num_col(self, nom_var):
         for i in range(len(self.header)):
             if nom_var == self.header[i][0]:
                 return i
-                
-    def add_col(self,nom, colonne):
+
+    def add_col(self, nom, colonne):
         """
         Ajoute une colonne au dataframe
 
@@ -133,37 +133,37 @@ class Dataframe :
             print("Le nombre de données n'est pas bon.")
             raise IndexError
         else:
-            if isinstance(colonne[0], float) is True :
+            if isinstance(colonne[0], float) is True:
                 for i in colonne:
-                    if (isinstance(i, float) is False and isinstance(i, int) is False) and i != 'mq' :
+                    if (isinstance(i, float) is False and isinstance(i, int) is False) and i != 'mq':
                         print("La valeur {i} n'est pas au bon format !")
                         raise TypeError
                 self.header.append([nom, "float"])
-                for key,value in self.data.items():
+                for key, value in self.data.items():
                     temp = value
                     temp.append(colonne[key])
                     self.data[key] = temp
-            elif isinstance(colonne[0], int) is True :
+            elif isinstance(colonne[0], int) is True:
                 for i in colonne:
                     if isinstance(i, int) is False and i != 'mq':
                         print("La valeur {i} n'est pas au bon format !")
                         raise TypeError
                 self.header.append([nom, "int"])
-                for key,value in self.data.items():
+                for key, value in self.data.items():
                     temp = value
                     temp.append(colonne[key])
                     self.data[key] = temp
-            elif isinstance(colonne[0], str) is True :
+            elif isinstance(colonne[0], str) is True:
                 for i in colonne:
-                    if isinstance(i, str) is False and i != 'mq' :
+                    if isinstance(i, str) is False and i != 'mq':
                         print("La valeur {i} n'est pas au bon format !")
                         raise TypeError
                 self.header.append([nom, "str"])
-                for key,value in self.data.items():
+                for key, value in self.data.items():
                     temp = value
                     temp.append(colonne[key])
                     self.data[key] = temp
-            else :
+            else:
                 print("Le format des valeurs n'est pas pris en charge.")
                 raise TypeError
 
@@ -178,20 +178,18 @@ class Dataframe :
         """
         id = None
         temp_id = 0
-        for i in self.header :
+        for i in self.header:
             if nom == i[0]:
                 id = temp_id
             temp_id += 1
         if id is None:
             print("La colonne n'existe pas.")
-        else :
+        else:
             for key in self.data.keys():
                 temp = self.data[key]
                 del temp[id]
                 self.data[key] = temp
             del self.header[id]
-
-
 
     def ligne(self, numero):
         """
@@ -210,7 +208,7 @@ class Dataframe :
         if (numero >= len(self.data) or numero < 0) is True:
             print("Cette ligne n'existe pas.")
             raise IndexError
-        else :
+        else:
             return self.data[numero]
 
     def add_ligne(self, ligne):
@@ -227,7 +225,7 @@ class Dataframe :
             raise IndexError
         else:
             id = 0
-            for variable in self.header :
+            for variable in self.header:
                 if variable[1] == "str":
                     if isinstance(ligne[id], str) is False and variable != 'mq':
                         print("La valeur numéro {id} est au mauvais format.")
@@ -247,7 +245,7 @@ class Dataframe :
     def del_ligne(self, numero):
         """
         Supprime une ligne du dataframe
-       
+
         Après avoir retiré l'élement, la fonction réarrange les numéros pour combler le vide
 
         Parameters:
@@ -256,26 +254,26 @@ class Dataframe :
             numéro de.s la.es ligne.s à supprimer
         """
         test = True
-        for i in numero :
+        for i in numero:
             if (i > len(self.data) or i < 0) is True:
                 test = False
                 print("Il n'y a pas de lignes correspondantes au numéro {i}")
-        if test is True :
+        if test is True:
             if len(numero) == 1:
                 self.data.pop(numero[0])
                 nouvelle_taille = len(self.data)
-                clefs =[]
+                clefs = []
                 for i in range(nouvelle_taille):
                     clefs.append(i)
-                self.data=dict(zip(clefs, list(self.data.values())))
+                self.data = dict(zip(clefs, list(self.data.values())))
             else:
                 for key in numero:
                     self.data.pop(key)
                 nouvelle_taille = len(self.data)
-                clefs =[]
+                clefs = []
                 for i in range(nouvelle_taille):
                     clefs.append(i)
-                self.data=dict(zip(clefs, list(self.data.values())))         
+                self.data = dict(zip(clefs, list(self.data.values())))
 
     def get_item(self, numero, variable):
         """
@@ -295,13 +293,13 @@ class Dataframe :
         """
         id = None
         temp_id = 0
-        for i in self.header :
+        for i in self.header:
             if i[0] == variable:
                 id = temp_id
             temp_id += 1
-        if id is None :
+        if id is None:
             print("Mauvais nom de variable")
-        else :
+        else:
             return self.data[numero][id]
 
     def header_names(self):
@@ -315,7 +313,7 @@ class Dataframe :
         """
         return [h[0] for h in self.header]
 
-    def modif_item(self,numero, variable, nouvelle_valeur):
+    def modif_item(self, numero, variable, nouvelle_valeur):
         """
         Modifie une valeur du dataframe
 
@@ -330,11 +328,11 @@ class Dataframe :
         """
         id = None
         temp_id = 0
-        for i in self.header :
+        for i in self.header:
             if i[0] == variable:
                 id = temp_id
             temp_id += 1
-        if id is None :
+        if id is None:
             print("Mauvais nom de colonne")
         else:
             self.data[numero][id] = nouvelle_valeur
