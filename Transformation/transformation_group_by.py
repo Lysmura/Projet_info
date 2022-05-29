@@ -26,7 +26,7 @@ class Groupby(Transformation):
             compteur = 0
             data = {}
             for element in value:
-                dict.update({compteur:element})
+                data.update({compteur:element})
                 compteur +=1
             table_group_by.append(Dataframe('table des {}'.format(value[id_var]),deepcopy(self.df_1.header),dict))
             value = value[0]
