@@ -9,7 +9,7 @@ class Filter(Transformation):
         self.__valeur = valeur
 
     def _operation(self):
-        super()._operation()
+        super()._operation(self)
         try:
             if self.__critere not in ('==','<','>','>=','<='):
                 raise ValueError("l'argument critere doit appartenir à la liste suivante: ==,<,>,>=,<=")
