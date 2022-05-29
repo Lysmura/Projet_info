@@ -13,12 +13,12 @@ class Formater(Transformation):
             if isinstance(self.df_1.header[self.df_1.num_col(self.var)][1],self.__format_final):
                 raise ValueError('La variable est déjà au format désiré')
         except ValueError as ve:
-            print(ve)
+            return ve
         try:
             if isinstance(self.df_1.header[self.df_1.num_col(self.var)][1],self.__format_depart):
                 raise ValueError('La variable format de depart indiqué est faux')
         except ValueError as ve:
-            print(ve)
+            return ve
         new_header = deepcopy(self.df_1.header)
         new_data = deepcopy(self.df_1.data)
         trans_df = Dataframe('formatage',new_header,new_data)
