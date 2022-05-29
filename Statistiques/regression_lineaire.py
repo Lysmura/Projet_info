@@ -21,6 +21,8 @@ class Regression_lineaire(Bivaries):
         --------
         matplot
             droite de regression
+        str
+            données établies par la regression
         """
         super().__init__(col_x, col_y)
         x = col_x
