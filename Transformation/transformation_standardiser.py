@@ -4,6 +4,7 @@ from Statistiques.min import Min
 from Statistiques.max import Max
 from Structure.dataframe import Dataframe
 from Transformation.transformation_transformation import Transformation
+from copy import deepcopy
 
 class Standardiser(Transformation):
     def __init__(self,df,action,var = None):
@@ -16,7 +17,7 @@ class Standardiser(Transformation):
             if action not in ('centrer','standardiser','normaliser'):
                 raise ValueError("l'argument operation doit appartenir à la liste suivante: centrer,standarsiser,normaliser")
         except ValueError as ve:
-            print(ve)
+            return ve
         self.__action= action
 
     def _operation(self):
@@ -30,7 +31,7 @@ class Standardiser(Transformation):
             if self.__action == 'centrer':
                 for i in var_num:
                     mean = Moyenne(self.df_1.col(i[0]))._operation()
-                    trans_df = Dataframe('standardisation',self.df_1.header,self.df_1.data)
+                    trans_df = Dataframe('standardisation',deepcopy(self.df_1.header),deepcopy(self.df_1.data))
                     for key in trans_df.data.keys():
                         trans_df.data[key][i[1]] -= mean
                 return trans_df
@@ -39,7 +40,7 @@ class Standardiser(Transformation):
                 for i in var_num:
                     min = Min(self.df_1.col(i[0]))._operation()
                     max = Max(self.df_1.col(i[0]))._operation()
-                    trans_df = Dataframe('standardisation',self.df_1.header,self.df_1.data)
+                    trans_df = Dataframe('standardisation',deepcopy(self.df_1.header),deepcopy(self.df_1.data))
                     den = max - min
                     for key in trans_df.data.keys():
                         trans_df.data[key][i[1]] = (trans_df.data[key][i[1]] - min)/den
@@ -49,7 +50,7 @@ class Standardiser(Transformation):
                 for i in var_num:
                     ecart_type = Ecart_type(self.df_1.col(i[0]))._operation()
                     mean = Moyenne(self.df_1.col(i[0]))._operation()
-                    trans_df = Dataframe('standardisation',self.df_1.header,self.df_1.data)
+                    trans_df = Dataframe('standardisation',deepcopy(self.df_1.header),deepcopy(self.df_1.data))
                     for key in trans_df.data.keys():
                         trans_df.data[key][i[1]] = (trans_df.data[key][i[1]] - mean)/ecart_type
                 return trans_df
@@ -57,7 +58,7 @@ class Standardiser(Transformation):
         if self.var != None:    
             if self.__action == 'centrer':
                 mean = Moyenne(self.df_1.col(self.var[0]))._operation()
-                trans_df = Dataframe('standardisation',self.df_1.header,self.df_1.data)
+                trans_df = Dataframe('standardisation',deepcopy(self.df_1.header),deepcopy(self.df_1.data))
                 for key in trans_df.data.keys():
                     trans_df.data[key][self.df_1.num_col(self.var[0])] -= mean
                 return trans_df
@@ -66,7 +67,7 @@ class Standardiser(Transformation):
                 min = Min(self.df_1.col(self.var[0]))._operation()
                 max = Max(self.df_1.col(self.var[0]))._operation()
                 den = max - min
-                trans_df = Dataframe('standardisation',self.df_1.header,self.df_1.data)
+                trans_df = Dataframe('standardisation',deepcopy(self.df_1.header),deepcopy(self.df_1.data))
                 for key in trans_df.data.keys():
                     trans_df.data[key][self.df_1.num_col(self.var[0])] = (trans_df.data[key][self.df_1.num_col(self.var[0])] - min)/den
                 return trans_df
@@ -74,7 +75,8 @@ class Standardiser(Transformation):
             if self.__action == 'standardiser':
                 ecart_type = Ecart_type(self.df_1.col(self.var[0]))._operation()
                 mean = Moyenne(self.df_1.col(self.var[0]))._operation()
-                trans_df = Dataframe('standardisation',self.df_1.header,self.df_1.data)
+                trans_df = Dataframe('standardisation',deepcopy(self.df_1.header),deepcopy(self.df_1.data))
                 for key in trans_df.data.keys():
                     trans_df.data[key][self.df_1.num_col(self.var[0])] = (trans_df.data[key][self.df_1.num_col(self.var[0])] - mean)/ecart_type
                 return trans_df
+        
