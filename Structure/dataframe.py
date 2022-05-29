@@ -76,11 +76,7 @@ class Dataframe :
             affichage += i[0] + "   "
         affichage += "\n"
         for key, value in self.data.items():
-            if isinstance(value[0],list): 
-                #pour que dans le cas d'un groupeby seul la première ligne apparaisse
-                affichage += "{} ".format(key) + str(value[0]) + "\n"
-            else:
-                affichage += "{} ".format(key) + str(value) + "\n"
+            affichage += "{} ".format(key) + str(value) + "\n"
         return affichage
 
     def __eq__(self, other):
