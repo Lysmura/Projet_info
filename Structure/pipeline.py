@@ -21,8 +21,7 @@ class Pipeline:
         self.__op_possible = [Transformation,Univaries,Bivaries,import_export]
     
     def ajouter_operation(self,operation):
-        validation_operation = [isinstance(operation[1],op_possible) for op_possible in self.__op_possible]
-        if any(validation_operation):
+        if if any([any([isinstance(element,op_possible) for element in operation]) for op_possible in self.__op_possible]):
             self.__liste_operations.append(operation)
         else:
             print('l\'operation n\'est pas reconnu et n\'a pas été ajouté pour execution')
