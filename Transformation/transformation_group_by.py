@@ -7,6 +7,7 @@ class Groupby(Transformation):
         super().__init__(df,var)
 
     def _operation(self):
+        super()._operation()
         id_var = self.df_1.num_col(self.var[0])
         new_header =  deepcopy(self.df_1.header)
         trans_df = Dataframe('group_by_' + self.df_1.header[id_var][0],new_header,{})
