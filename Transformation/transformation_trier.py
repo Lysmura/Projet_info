@@ -11,6 +11,7 @@ class Trier(Transformation):
         self.__ascendant = ASCENDANT
     
     def _operation(self):
+        super()._operation()
         table_grouper,liste_tableau = Groupby(self.df_1,self.var)._operation()
         col_trier = tri().tri_fusion(table_grouper.col(self.var[0]))
         table_final = Dataframe('tri',deepcopy(table_grouper),{})
