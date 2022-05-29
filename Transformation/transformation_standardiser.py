@@ -13,14 +13,14 @@ class Standardiser(Transformation):
         else:
             super().__init__(df,[df.header[0][0]])
             self.var = None
-        try:
-            if action not in ('centrer','standardiser','normaliser'):
-                raise ValueError("l'argument operation doit appartenir à la liste suivante: centrer,standarsiser,normaliser")
-        except ValueError as ve:
-            return ve
         self.__action= action
 
     def _operation(self):
+        try:
+            if self.__action not in ('centrer','standardiser','normaliser'):
+                raise ValueError("l'argument operation doit appartenir à la liste suivante: centrer,standarsiser,normaliser")
+        except ValueError as ve:
+            return ve
         if self.var == None:
             var_num = []
             size = len(self.df_1.header)
