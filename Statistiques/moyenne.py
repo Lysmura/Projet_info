@@ -22,14 +22,14 @@ class Moyenne(Univaries):
                 raise ValueError("Le format de la variable n'est pas bon")
         except ValueError as ve:
             print(ve)
-        if self.col.count('mq') == len(self.col):
+        moyenne = 0
+        n = 0
+        for i in self.col:
+            if i != 'mq':
+                moyenne = moyenne + i
+                n = n + 1
+        if n ==0:
             return 'mq'
-        else :
-            moyenne = 0
-            n = 0
-            for i in self.col:
-                if i != 'mq':
-                    moyenne = moyenne + i
-                    n = n + 1
+        else: 
             moyenne = moyenne/n
             return moyenne

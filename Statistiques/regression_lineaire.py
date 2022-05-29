@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 class Regression_lineaire(Bivaries):
 
-    def __init__(self, col_x, col_y):
+    def __init__(self, col_x, col_y, name ="Regression_Lineaire"):
         """
         Retourne une regression linéaire entre deux colonnes
 
@@ -33,6 +33,7 @@ class Regression_lineaire(Bivaries):
             if elem == "mq" :
                 del x[i]
                 del y[i]
+
         self.x_col = x
         self.y_col = y
         self.Results = stats.linregress(x=self.x_col, y=self.y_col)
@@ -40,10 +41,12 @@ class Regression_lineaire(Bivaries):
         self.beta1 = self.Results.slope
         self.erreur = self.Results.stderr
         self.R2 = self.Results.rvalue**2
+        self.name = name
 
     def _operation(self):
         plt.plot(self.x_col, self.y_col, 'o', label='Data')
         droite_y = [ self.beta0 + self.beta1*x for x in self.x_col]
-        plt.plot(self.x_col, droite_y, 'r', label='Droite de regression')
+        plt.plot(self.x_col, droite_y, 'r', label=f'Droite de regression {self.name}')
         plt.legend()
-        plt.show()
+        plt.savefig(f"ExportedFiles/{self.name}.png")
+        #plt.show()
