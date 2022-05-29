@@ -16,6 +16,7 @@ class Standardiser(Transformation):
         self.__action= action
 
     def _operation(self):
+        super()._operation()
         try:
             if self.__action not in ('centrer','standardiser','normaliser'):
                 raise ValueError("l'argument operation doit appartenir à la liste suivante: centrer,standarsiser,normaliser")
