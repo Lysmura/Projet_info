@@ -50,3 +50,4 @@ class Regression_lineaire(Bivaries):
         plt.legend()
         plt.savefig(f"ExportedFiles/{self.name}.png")
         #plt.show()
+        return("La droite de régression a pour coefficient directeur {}, coupe les ordonnées en {}. On a R² = {}".format(self.beta0, self.beta1, self.R2))
