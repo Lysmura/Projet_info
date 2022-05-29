@@ -12,7 +12,7 @@ class moyenne_glissante(Transformation):
         for i in range(len(col)):
             try:
                 col[i] = Moyenne._operation(col[i-pas:i+1])
-                L += col[i]
+                L += [col[i]]
             except IndexError:
                 pass
         return L
