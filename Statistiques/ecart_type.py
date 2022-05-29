@@ -5,9 +5,14 @@ class Ecart_type(Univaries):
     """
     Calcule l'écart type d'une colonne choisit
 
+    Attributes:
+    -----------
+    col : list
+        colonne du dataframe
+
     Methods:
     -------
-    _operation(col) : float
+    _operation() : float
         Retourne la valeur de l'écart type pour une colonne de variables 
         numériques.
     """

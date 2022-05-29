@@ -12,7 +12,7 @@ class Univaries(ABC, Statistiques) :
 
     Methods:
     --------
-    _operation(col) : float
+    _operation() : float
         Retourne une statistique d'une variable dans une colonne
     """
     def __init__(self, col):

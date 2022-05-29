@@ -4,9 +4,14 @@ class Max(Univaries):
     """
     Calcule la valeur maximum d'une colonne choisit
 
+    Attributes:
+    -----------
+    col : list
+        colonne du dataframe
+
     Methods:
     --------
-    _operation(col) : var
+    _operation() : var
         Retourne la valeur maximum d'une variable numérique dans une colonne
 
     Exemples:
