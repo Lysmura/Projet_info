@@ -22,10 +22,10 @@ class Formater(Transformation):
         new_header = deepcopy(self.df_1.header)
         new_data = deepcopy(self.df_1.data)
         trans_df = Dataframe('formatage',new_header,new_data)
-        for value in trans_df.values():
+        for value in trans_df.data.values():
             value[self.df_1.num_col(self.var[0])] =  self.__format_final(value[self.df_1.num_col(self.var[0])])
         if self.__format_final == str:
-            for value in trans_df.values():
+            for value in trans_df.data.values():
                 if str(value[self.df_1.num_col(self.var[0])])[-2:] == '.0':
                     value[self.df_1.num_col(self.var[0])] =  str(value[self.df_1.num_col(self.var[0])]).replace('.0','')
                 else:
