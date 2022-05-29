@@ -5,7 +5,7 @@ from Statistiques.min import Min
 from Statistiques.ecart_type import Ecart_type
 from Statistiques.compter import Compter
 from Statistiques.univaries import Univaries
-from Statistiques.Bivaries import Bivaries
+from Statistiques.bivaries import Bivaries
 from Outils.my_import import my_import
 from Outils.my_export import my_export
 from Transformation.transformation_group_by import Groupby
