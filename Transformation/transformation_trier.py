@@ -1,27 +1,27 @@
 from Transformation.transformation_transformation import Transformation
 from Structure.dataframe import Dataframe
 from Transformation.transformation_group_by import Groupby
+from Transformation.transformation_rowbind import Row_bind
+from copy import deepcopy
 from utilities.tri import tri
 
-class trier(Transformation):
-    def __init__(self,df,var):
+class Trier(Transformation):
+    def __init__(self,df,var,ASCENDANT=True):
         super().__init__(df,var)
+        self.__ascendant = ASCENDANT
     
     def _operation(self):
-        col_trier = tri().tri_fusion(self.__df.col(self.__var[0]))
-        compteur= 1
-        dict_trier={}
-        for element in col_trier:
-            if element in dict_trier:
-                dict_trier[element].append(compteur)
-            else:
-                dict_trier.update({element:[compteur]})
-            compteur +=1
-        trans_df = Groupby(self.df_1,self.var)._operation()
-        for key,value in trans_df.data.items():
-            id = self.df_1.num_col(self.var[0])
-            for element in value:
-                new_key = dict_trier[element[id]][-1]
-                trans_df.update({new_key:element})
-            del trans_df.data[key]
-        return trans_df
+        table_grouper,liste_tableau = Groupby(self.df_1,self.var)._operation()
+        col_trier = tri().tri_fusion(table_grouper.col(self.var[0]))
+        table_final = Dataframe('tri',deepcopy(table_grouper),{})
+        if self.__ascendant:
+            for element in col_trier:
+                for table in liste_tableau:
+                    if element == table.data[0][table.num_col(self.var)]:
+                        table_final = Row_bind(table_final,table)
+        else:
+            for element in col_trier.reverse():
+                for table in liste_tableau:
+                    if element == table.data[0][table.num_col(self.var)]:
+                        table_final = Row_bind(table_final,table)
+        return table_final
