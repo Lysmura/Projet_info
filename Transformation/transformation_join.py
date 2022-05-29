@@ -8,6 +8,7 @@ class Join(Transformation):
         self.methode = methode
 
     def _operation(self):
+        super()._operation()
         size_1 =len(self.df_1.header)
         size_2 = len(self.df_2.header)
         if self.methode == 'inter':

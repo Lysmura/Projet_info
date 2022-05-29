@@ -7,6 +7,7 @@ class Select(Transformation):
         super().__init__(df,var)
 
     def _operation(self):
+        super()._operation()
         new_header = copy.deepcopy(self.df_1.header)
         new_dict = copy.deepcopy(self.df_1.data)
         trans_df = Dataframe('selection',new_header,new_dict)
