@@ -9,6 +9,7 @@ class Formater(Transformation):
         self.__format_final = format_final
 
     def _operation(self):
+        super()._operation()
         try:
             if isinstance(self.df_1.header[self.df_1.num_col(self.var[0])],self.__format_final):
                 raise ValueError('La variable est déjà au format désiré')
