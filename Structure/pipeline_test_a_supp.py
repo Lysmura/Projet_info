@@ -70,3 +70,34 @@ class Pipeline(self,liste_operations):
                 col = df.col(arguments)
                 print(Compter(col, freq)._operation())
             if nom == "Regression linéaire" :
+                
+                
+from Transformation.transformation_transformation import Transformation
+from Statistiques.univaries import Univaries
+from Statistiques.Bivaries import Bivaries
+from Outils.import_export import import_export
+from Structure.dataframe import Dataframe
+from copy import deepcopy
+
+class Pipeline:
+    def __init__(self):
+        self.__liste_operations = []
+        self.__op_possible = [Transformation,Univaries,Bivaries,import_export]
+    
+    def ajouter_operation(self,operation):
+        validation_operation = [isinstance(operation,op_possible) for op_possible in self.__op_possible]
+        if any(validation_operation):
+            self.__liste_operations.append(operation)
+        else:
+            print('l\'operation n\'est pas reconnu et n\'a pas été ajouté pour execution')
+    
+    def supprimer_operation(self,numero : int):
+        if numero >=0 and numero < len(self.__liste_operations):
+            self.__liste_operations.pop(numero)
+
+    def execution(self):
+        trans_df = Dataframe('Resultat',[],{})
+        dico_stat = {}
+        for i in range(len(self.__liste_operations)):
+            if isinstance(self.__liste_operations[i],Univaries):
+                dico_stat.update({i : self.__liste_operations[i]._operation()})
