@@ -17,3 +17,4 @@ class moyenne_glissante(Transformation):
                 temp = Moyenne(temp)._operation()
                 l_moyenne_glissante.append(temp)
         return l_moyenne_glissante
+
