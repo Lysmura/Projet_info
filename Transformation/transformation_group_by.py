@@ -22,7 +22,7 @@ class Groupby(Transformation):
             compteur +=1
             del trans_df.data[key]
         table_group_by = []
-        for key,value in trans_df.data.items():
+        for key,value in self.df_1.data.items():
             compteur = 0
             data = {}
             for element in value:
