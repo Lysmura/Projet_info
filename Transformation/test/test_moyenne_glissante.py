@@ -3,11 +3,6 @@ from Outils.import_JSON import import_json
 from Structure.dataframe import Dataframe
 import unittest
 
-def From_CSV_to_Dataframe():
-    header, data = import_json('Data/electricity_data','2013-01.json.gz').importing()
-    data_frame =Dataframe(nom="donneeselectr", header = header, data = data)
-    return data_frame
-
 class Test_moyenne_glissante(unittest.TestCase):
     header, data = import_json('Data/electricity_data','2013-01.json.gz').importing()
     data_frame =Dataframe(nom="donneeselectr", header = header, data = data)
