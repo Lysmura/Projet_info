@@ -28,5 +28,8 @@ class Moyenne(Univaries):
             if i != 'mq':
                 moyenne = moyenne + i
                 n = n + 1
-        moyenne = moyenne/n
-        return moyenne
+        if n ==0:
+            return 'mq'
+        else: 
+            moyenne = moyenne/n
+            return moyenne

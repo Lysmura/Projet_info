@@ -25,8 +25,9 @@ class Test_Transfromation(unittest.TestCase):
     def test_groupBy(self):
         new_data = Select(self.data_1,['numer_sta','dd',''])._operation()
         Tab_filter = Filter(new_data,['dd'],'>',230)._operation()
-        group = Groupby(Tab_filter,['numer_sta'])._operation()
-        print(group)
+        trans_df,table_group_by = Groupby(Tab_filter,['numer_sta'])._operation()
+        print(table_group_by)
+        print(trans_df)
         
 if __name__ == '__main__':
     unittest.main()
