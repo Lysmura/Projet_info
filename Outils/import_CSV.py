@@ -8,7 +8,6 @@ class import_csv(my_import):
         super().__init__(chemin, nom_fichier)
 
     def importing(self):
-
         data=[]
         if self.nom_fichier[-1]=='z':
             with gzip.open(self.chemin + '/' + self.nom_fichier, mode='rt') as gzfile :
