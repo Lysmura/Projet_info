@@ -13,9 +13,8 @@ class Test_Transfromation(unittest.TestCase):
         print(header)
         self.data_1 = Dataframe('data',header,data)
 
-    def test_formater(self):
-        Tab_formater = Formater(self.data_1,['dd'],str,int)._operation()
-        Tab_filter = Filter(Tab_formater,['dd'],'>',230)._operation()
+    def test_filter(self):
+        Tab_filter = Filter(self.data_1,['dd'],'>',230)._operation()
         print(Tab_filter)
 
 if __name__ == '__main__':
