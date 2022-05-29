@@ -4,13 +4,13 @@ from Statistiques.max import Max
 from Statistiques.min import Min
 from Statistiques.ecart_type import Ecart_type
 from Statistiques.compter import Compter
+from Statistiques.univaries import Univaries
+from Statistiques.Bivaries import Bivaries
 from Outils.my_import import my_import
 from Outils.my_export import my_export
 from Transformation.transformation_group_by import Groupby
 from Transformation.transformation_join import Join
 from Transformation.transformation_transformation import Transformation
-from Statistiques.univaries import Univaries
-from Statistiques.Bivaries import Bivaries
 from Outils.import_export import import_export
 from Structure.dataframe import Dataframe
 from copy import deepcopy
