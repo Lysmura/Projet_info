@@ -17,8 +17,14 @@ class Moyenne(Univaries):
         super().__init__(col)
 
     def _operation(self):
+        test = None
+        i=0
+        while test == None and i < len(self.col):
+            if self.col[i] != 'mq':
+                test=self.col[i]
+            i+=1
         try:
-            if isinstance(self.col[0], int) is False and isinstance(self.col[0], float) is False :
+            if isinstance(i, int) is False and isinstance(i, float) is False:
                 raise ValueError("Le format de la variable n'est pas bon")
         except ValueError as ve:
             print(ve)
@@ -28,7 +34,7 @@ class Moyenne(Univaries):
             if i != 'mq':
                 moyenne = moyenne + i
                 n = n + 1
-        if n ==0:
+        if n == 0:
             return 'mq'
         else: 
             moyenne = moyenne/n
