@@ -34,6 +34,7 @@ class Pipeline:
         stockage_df = []
         dico_stat = {}
         for operation in self.__liste_operations:
+            compteur = 0
             print(operation)
             if isinstance(operation,Univaries):
                 try:
@@ -65,14 +66,16 @@ class Pipeline:
                         operation[1].col = table.col(operation[1].col)
                         print('stat pour' +table.nom)
                         print(operation[1].__operation())
-                        dico_stat.update({i:operation[1].__operation()})   
+                        dico_stat.update({compteur:operation[1].__operation()})
+                        compteur +=1
                 else:
                     for element in stockage_df:
                         if  operation[0] == element.nom:
                             operation[0] = element    
                     operation[1].col = operation[0].col(operation[1].col)
                     print(operation[1].__operation())
-                    dico_stat.update({i:operation[1].__operation()})
+                    dico_stat.update({compteur:operation[1].__operation()})
+                    compteur +=1
 
             if isinstance(operation,Bivaries):
                 try:
@@ -96,7 +99,8 @@ class Pipeline:
                         operation[1].col_x = table.col(operation[1].col_x)
                         operation[1].col_y = table.col(operation[1].col_y)
                         print(operation[1].__operation())
-                        dico_stat.update({i:operation[1].__operation()})
+                        dico_stat.update({compteur:operation[1].__operation()})
+                        compteur +=1
                 else:
                     for element in stockage_df:
                         if  operation[0] == element.nom:
@@ -105,6 +109,7 @@ class Pipeline:
                     operation[1].col_y = operation[0].col(operation[1].col_y)
                     print(operation[1].__operation())
                     dico_stat.update({i:operation[1].__operation()})
+                    compteur +=1
             if any(isinstance(objet,Transformation) for objet in operation):
                 try:
                     if len(stockage_df) == 0:
