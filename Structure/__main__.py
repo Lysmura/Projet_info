@@ -102,4 +102,5 @@ data_desiree_selected=Select(data_desiree,['consommation_brute_electricite_rte',
 #Si on veut observer concretement ces disparités on peut afficher une carte 
 Export_carte('ExportedFiles','disparite_relation_temp_conso').exporting(datafram_a_deux_colonnes,'R2')
 
+#Q5: moyenne temperature dans une region?
 
