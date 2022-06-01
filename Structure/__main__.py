@@ -20,6 +20,8 @@ from Outils.import_export import import_export
 from Structure.dataframe import Dataframe
 from Statistiques.regression_lineaire import Regression_lineaire
 from copy import deepcopy
+from Transformation.transformation_formater import Formater
+from Outils.export_carte import Export_carte
 import random
 
 
@@ -81,5 +83,23 @@ data_desiree=Groupby(Data_temp_meteo_region,['Region'])
 #prenons un exemple de region(Normandie):
 #Ici je voulais selectionner les lignes dont la region c'est normandie mais jsp comment faire
 #Apres on realise la regression
-Regression_lineaire(data_meteo_elec_Normandie,'consommation_brute_electricite_rte','t')
+#formatons la variable temperature 't' en float
+Formater(data_desiree,['t'],str,float)
+Regression_lineaire(data_desiree.col('consommation_brute_electricite_rte'),data_desiree.col('t')).R2
+Regression_lineaire(data_desiree.col('consommation_brute_electricite_rte'),data_desiree.col('t'))._operation()
+#Q2: Le vent joue t-il un role dans cette consommation
+data_desiree_selected=Select(data_desiree,['consommation_brute_electricite_rte','t'])
+#A l'utilisateur d'analyser le role en analysons les deux colonnes
+
+#Q3:Peut-on observer des tendances à long terme pour la consommation électrique régionale ou nationale?
+
+#Ici je vois pas comment appliquer la moyenne glissante pour donnee une liste des moyennes tous les 2j ou 3j...
+
+#Q4: Observe-t-on des disparités régionales pour la relation entre température et consommation?
+
+#Ici faut calculer le coefficient de correlation R2 entre temperature et consommation dans chaque region
+#Il faut un dataframe associons à chaque region un coefficient de correlation (2 colonnes)
+#Si on veut observer concretement ces disparités on peut afficher une carte 
+Export_carte('ExportedFiles','disparite_relation_temp_conso').exporting(datafram_a_deux_colonnes,'R2')
+
 
