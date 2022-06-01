@@ -51,3 +51,35 @@ col_x = [5,4,15,1,2,4, 2]
 col_y = [20,16,45,4,'mq',12,3]
 reg = Regression_lineaire(col_x, col_y, 'fois_4') #Dans ce cas les colonnes sont corélées
 reg._operation() #execution : un fichier jpg est ajouté dans ExportedFiles
+
+#importation des donnees de janvier 2013
+data_1_stockee=Test_pip.ajouter_operation(('data_1',import_csv('Data/synop.csv.gz-20220511/donnees_meteo','synop.201301.csv.gz')))[0]
+data_2_stockee=Test_pip.ajouter_operation(('data_2',import_json('Data/electricity_data','2013-01.json.gz')))[0]
+
+#importation des donnees de novembre 2021
+header_meteo, data_meteo = import_csv('Data/synop.csv.gz-20220511/donnees_meteo','synop.202111.csv.gz').importing()
+header_association_region_idstation, data_association_region_station = import_csv('Data/synop.csv.gz-20220511','postesSynopAvecRegions.csv').importing()
+header_electricite, data_electricite=import_json('Data/electricity_data','2021-11.json.gz').importing()
+#Creation du dataframe 
+Data_meteo_20_01= Dataframe('donnee meteo 03-2021',header_meteo, data_meteo)
+Data_elec_11_2021=Dataframe('donnee electricite 11-2021',header_electricite, data_electricite)
+Association_region_idstation = Dataframe('asso',header_association_region_idstation, data_association_region_station)
+#Reponse aux questions
+
+#Q1: Y a-t-il une relation entre température et consommation électrique?
+#On propose la realisation de cette relation dans chaque region
+#Associons donc les station aux regionx grace aux dataframe Association_region_idstation
+#Nous allons tout d'abord rennomer la variable 'numer_sta' par 'ID'
+Data_meteo_20_01.header[0][0]= 'ID'
+#Renommons aussi 'region'(table json) par 'Region'(table d'asso id et sta)
+Data_elec_11_2021.header[0][0] = 'Region'
+#Realisons la jointure par 'ID'
+Data_sta_reg=Join(Data_meteo_20_01,Association_region_idstation,['ID'],methode='inter')#left ou right join?
+#Realisons la jointure entre cette table et les donnees electricite par 'Region'
+Data_temp_meteo_region=Join(Data_sta_reg,Data_elec_11_2021,['Region'],methode='inter')
+data_desiree=Groupby(Data_temp_meteo_region,['Region'])
+#prenons un exemple de region(Normandie):
+#Ici je voulais selectionner les lignes dont la region c'est normandie mais jsp comment faire
+#Apres on realise la regression
+Regression_lineaire(data_meteo_elec_Normandie,'consommation_brute_electricite_rte','t')
+
