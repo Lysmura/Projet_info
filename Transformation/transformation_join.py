@@ -1,6 +1,6 @@
 from Transformation.transformation_transformation import Transformation
 from Structure.dataframe import Dataframe
-
+from copy import deepcopy
 
 class Join(Transformation):
     def __init__(self,df_1,df_2,by,methode='inter'):
@@ -32,7 +32,8 @@ class Join(Transformation):
                         for k in var_nocom:
                             trans_df.data[cle_join].append(value[k])
                 compteur = 0
-                for key in trans_df.data.keys():
+                data_temp = deepcopy(trans_df.data)
+                for key in data_temp.keys():
                     trans_df.data[compteur] = trans_df.data[key]
                     compteur +=1
                     del trans_df.data[key]
@@ -58,7 +59,8 @@ class Join(Transformation):
                         for k in var_nocom:
                             trans_df.data[cle_join].append(value[k])
                 compteur = 0
-                for key in trans_df.data.keys():
+                data_temp = deepcopy(trans_df.data)
+                for key in data_temp.keys():
                     trans_df.data[compteur] = trans_df.data[key]
                     compteur +=1
                     del trans_df.data[key]
@@ -81,7 +83,8 @@ class Join(Transformation):
                         trans_df.data[cle_join].append(value[k])
 
             compteur = 0
-            for key in trans_df.data.keys():
+            data_temp = deepcopy(trans_df.data)
+            for key in data_temp.keys():
                 trans_df.data[compteur] = trans_df.data[key]
                 del trans_df.data[key]
                 if len(trans_df.data[compteur]) == len(trans_df.header):

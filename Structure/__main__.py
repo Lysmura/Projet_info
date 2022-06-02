@@ -60,15 +60,15 @@ Test_pip = Pipeline()
 
 #importation des donnees de janvier 2013
 Test_pip = Pipeline()
-Test_pip.ajouter_operation(('data_1',import_csv('Data/synop.csv.gz-20220511/donnees_meteo','synop.201301.csv.gz')))
-data_1_stockee= Test_pip.execution()[0]
-Test_pip.ajouter_operation(('data_2',import_json('Data/electricity_data','2013-01.json.gz')))
-data_2_stockee=Test_pip.execution()[0]
+#Test_pip.ajouter_operation(('data_1',import_csv('Data/synop.csv.gz-20220511/donnees_meteo','synop.201301.csv.gz')))
+#data_1_stockee= Test_pip.execution()[0]
+#Test_pip.ajouter_operation(('data_2',import_json('Data/electricity_data','2013-01.json.gz')))
+#data_2_stockee=Test_pip.execution()[0]
 
 #importation des donnees de novembre 2021
-header_meteo, data_meteo = import_csv('Data/synop.csv.gz-20220511/donnees_meteo','synop.202111.csv.gz').importing()
+header_meteo, data_meteo = import_csv('Data/synop.csv.gz-20220511/donnees_meteo','synop.201301.csv.gz').importing()
 header_association_region_idstation, data_association_region_station = import_csv('Data/synop.csv.gz-20220511','postesSynopAvecRegions.csv').importing()
-header_electricite, data_electricite=import_json('Data/electricity_data','2021-11.json.gz').importing()
+header_electricite, data_electricite=import_json('Data/electricity_data','2013-01.json.gz').importing()
 #Creation du dataframe 
 Data_meteo_20_01= Dataframe('donnee meteo 03-2021',header_meteo, data_meteo)
 Data_elec_11_2021=Dataframe('donnee electricite 11-2021',header_electricite, data_electricite)
@@ -79,27 +79,37 @@ Association_region_idstation = Dataframe('asso',header_association_region_idstat
 #On propose la realisation de cette relation dans chaque region
 #Associons donc les station aux regionx grace aux dataframe Association_region_idstation
 #Nous allons tout d'abord rennomer la variable 'numer_sta' par 'ID'
-Data_meteo_20_01.header[0][0]= 'ID'
+
+for i in range (len(Data_meteo_20_01.header)):
+    if Data_meteo_20_01.header[i][0] == 'numer_sta':
+        Data_meteo_20_01.header[i][0] = 'ID'
 #Renommons aussi 'region'(table json) par 'Region'(table d'asso id et sta)
-Data_elec_11_2021.header[0][0] = 'Region'
+for i in range (len(Data_elec_11_2021.header)):
+    if Data_elec_11_2021.header[i][0] == 'region':
+        Data_elec_11_2021.header[i][0] = 'Region'
+print(Data_elec_11_2021.header)
 #Realisons la jointure par 'ID'
-Data_sta_reg=Join(Data_meteo_20_01,Association_region_idstation,['ID'],methode='inter')#left ou right join?
+Data_sta_reg=Join(Data_meteo_20_01,Association_region_idstation,['ID'],methode='inter')._operation()#left ou right join?
+
 #Realisons la jointure entre cette table et les donnees electricite par 'Region'
-Data_temp_meteo_region=Join(Data_sta_reg,Data_elec_11_2021,['Region'],methode='inter')
+Data_temp_meteo_region=Join(Data_sta_reg,Data_elec_11_2021,['Region'],methode='inter')._operation()
+
 data_desiree,liste_group=Groupby(Data_temp_meteo_region,['Region'])._operation()
 #prenons un exemple de region(Normandie):
+print(data_desiree)
 for table in liste_group: 
-    Formater(table,['t'],str,float)
-    Regression_lineaire(table.col('consommation_brute_electricite_rte'),table.col('t')).R2
-    Regression_lineaire(table.col('consommation_brute_electricite_rte'),table.col('t'))._operation()
+    #print(table)
+    Formater(table,['t'],str,float)._operation()
+    #print(Regression_lineaire(table.col('consommation_brute_electricite_rte'),table.col('t')).R2)
+    #print(Regression_lineaire(table.col('consommation_brute_electricite_rte'),table.col('t'))._operation())
 #Ici je voulais selectionner les lignes dont la region c'est normandie mais jsp comment faire
 #Apres on realise la regression
 #formatons la variable temperature 't' en float
-Formater(data_desiree,['t'],str,float)
-Regression_lineaire(data_desiree.col('consommation_brute_electricite_rte'),data_desiree.col('t')).R2
-Regression_lineaire(data_desiree.col('consommation_brute_electricite_rte'),data_desiree.col('t'))._operation()
+#Formater(data_desiree,['t'],str,float)
+#Regression_lineaire(data_desiree.col('consommation_brute_electricite_rte'),data_desiree.col('t')).R2
+#Regression_lineaire(data_desiree.col('consommation_brute_electricite_rte'),data_desiree.col('t'))._operation()
 #Q2: Le vent joue t-il un role dans cette consommation
-data_desiree_selected=Select(data_desiree,['consommation_brute_electricite_rte','t'])
+#data_desiree_selected=Select(data_desiree,['consommation_brute_electricite_rte','t'])
 #A l'utilisateur d'analyser le role en analysons les deux colonnes
 
 #Q3:Peut-on observer des tendances à long terme pour la consommation électrique régionale ou nationale?
@@ -111,7 +121,7 @@ data_desiree_selected=Select(data_desiree,['consommation_brute_electricite_rte',
 #Ici faut calculer le coefficient de correlation R2 entre temperature et consommation dans chaque region
 #Il faut un dataframe associons à chaque region un coefficient de correlation (2 colonnes)
 #Si on veut observer concretement ces disparités on peut afficher une carte 
-Export_carte('ExportedFiles','disparite_relation_temp_conso').exporting(datafram_a_deux_colonnes,'R2')
+#Export_carte('ExportedFiles','disparite_relation_temp_conso').exporting(datafram_a_deux_colonnes,'R2')
 
 #Q5: moyenne temperature dans une region?
 

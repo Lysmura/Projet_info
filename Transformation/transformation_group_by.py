@@ -24,12 +24,13 @@ class Groupby(Transformation):
             compteur +=1
             del trans_df.data[key]
         table_group_by = []
-        for key,value in self.df_1.data.items():
+        id_var = trans_df.num_col(self.var[0])
+        for key,value in trans_df.data.items():
             compteur = 0
-            data = {}
+            data_group = {}
             for element in value:
-                data.update({compteur:element})
+                data_group.update({compteur:element})
                 compteur +=1
-            table_group_by.append(Dataframe('table des {}'.format(value[id_var]),deepcopy(self.df_1.header),data))
             value = value[0]
+            table_group_by.append(Dataframe('table des {}'.format(value[id_var]),deepcopy(trans_df.header),data_group))
         return trans_df,table_group_by
