@@ -11,6 +11,7 @@ from Outils.my_export import my_export
 from Transformation.transformation_group_by import Groupby
 from Transformation.transformation_join import Join
 from Transformation.transformation_transformation import Transformation
+from Transformation.transformation_moyenne_glissante import moyenne_glissante
 from Outils.import_export import import_export
 from Structure.dataframe import Dataframe
 from copy import deepcopy
@@ -35,7 +36,6 @@ class Pipeline:
         dico_stat = {}
         for operation in self.__liste_operations:
             compteur = 0
-            print(operation)
             if isinstance(operation,Univaries):
                 try:
                     if len(stockage_df) == 0:
@@ -57,24 +57,24 @@ class Pipeline:
                     return ie
                 try:
                     if all([operation[1].col != nom_colone[0] for nom_colone in operation[0].header]):
-                        raise IndexError("la variable {} est mal orthographié ou n'appartient pas aux dataframes indiqués".format(nom_var))
+                        raise IndexError("la variable {} est mal orthographié ou n'appartient pas aux dataframes indiqués".format(operation[1].col))
                 except IndexError as ie:
                     print(ie)
                     return ie
-                if  (self.__liste_operations[i-1][0] and isinstance(self.__liste_operations[i-1][2],Groupby)):
+                if  isinstance(stockage_df[-1]):
                     for table in stockage_df[-1]:
                         operation[1].col = table.col(operation[1].col)
                         print('stat pour' +table.nom)
-                        print(operation[1].__operation())
-                        dico_stat.update({compteur:operation[1].__operation()})
+                        print(operation[1]._operation())
+                        dico_stat.update({compteur:operation[1]._operation()})
                         compteur +=1
                 else:
                     for element in stockage_df:
                         if  operation[0] == element.nom:
                             operation[0] = element    
                     operation[1].col = operation[0].col(operation[1].col)
-                    print(operation[1].__operation())
-                    dico_stat.update({compteur:operation[1].__operation()})
+                    print(operation[1]._operation())
+                    dico_stat.update({compteur:operation[1]._operation()})
                     compteur +=1
 
             if isinstance(operation,Bivaries):
@@ -94,12 +94,12 @@ class Pipeline:
                         raise IndexError("une des variables variable est mal orthographié ou n'appartient pas aux dataframes indiqués")
                 except IndexError as ie:
                     return ie
-                if (self.__liste_operations[i-1][0] and isinstance(self.__liste_operations[i-1][2],Groupby)):
+                if isinstance(stockage_df[-1],list):
                     for table in stockage_df[-1]:
                         operation[1].col_x = table.col(operation[1].col_x)
                         operation[1].col_y = table.col(operation[1].col_y)
-                        print(operation[1].__operation())
-                        dico_stat.update({compteur:operation[1].__operation()})
+                        print(operation[1]._operation())
+                        dico_stat.update({compteur:operation[1]._operation()})
                         compteur +=1
                 else:
                     for element in stockage_df:
@@ -107,8 +107,8 @@ class Pipeline:
                             operation[0] = element
                     operation[1].col_x = operation[0].col(operation[1].col_x)
                     operation[1].col_y = operation[0].col(operation[1].col_y)
-                    print(operation[1].__operation())
-                    dico_stat.update({i:operation[1].__operation()})
+                    print(operation[1]._operation())
+                    dico_stat.update({compteur:operation[1]._operation()})
                     compteur +=1
             if any(isinstance(objet,Transformation) for objet in operation):
                 try:
@@ -117,12 +117,6 @@ class Pipeline:
                 except ValueError as ve:
                     print(ve)
                     return ve
-                try:
-                    if all([operation[2].df_1 != df_stock.nom for df_stock in stockage_df]):
-                        raise IndexError('le dataframe renseigné n\'existe pas')
-                except IndexError as ie:
-                    print(ie)
-                    return ie
                 if isinstance(operation[2],Join):
                     try:
                         if all([operation[2].df_2 != df_stock.nom for df_stock in stockage_df]):
@@ -130,6 +124,14 @@ class Pipeline:
                     except IndexError as ie:
                         print(ie)
                         return ie
+                if isinstance(operation[2], moyenne_glissante):
+                    if isinstance(stockage_df[-1],list):
+                            for table in stockage_df[-1]:
+                                operation[2].df_1 = table
+                                print(operation[2]._operation())
+                                dico_stat.update({compteur:operation[2]._operation()})
+                                compteur +=1
+
                 if operation[0]:
                     if isinstance(operation[2], Groupby):
                         for element in stockage_df:
@@ -139,7 +141,8 @@ class Pipeline:
                         df_1.nom = operation[1]
                         stockage_df.append(df_1)
                         print(df_1)
-                        stockage_df.append(df_2)
+                        stockage_df.append(df_2)                                
+
                     else:
                         for element in stockage_df:
                             if  operation[2].df_1 == element.nom:
@@ -154,14 +157,13 @@ class Pipeline:
                         stockage_df.append(df_1)
                 else:
                     for element in stockage_df:
-                            if  operation[1].df_1 == element.nom:
-                                operation[1].df_1 = element
-                    if operation[1].df_2 != None:
+                        if  operation[2].df_1 == element.nom:
+                            operation[2].df_1 = element
+                    if operation[2].df_2 != None:
                         for element in stockage_df:
-                            if  operation[1].df_2 == element.nom:
-                                operation[1].df_2 = element
-                    
-                    print(operation[1]._operation())
+                            if  operation[2].df_2 == element.nom:
+                                operation[2].df_2 = element 
+                    print(operation[2]._operation())
             if any(isinstance(objet,import_export) for objet in operation):
                 if isinstance(operation[1],my_import):
                     header,data = operation[1].importing()
