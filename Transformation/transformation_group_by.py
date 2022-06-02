@@ -18,7 +18,8 @@ class Groupby(Transformation):
             else:
                 trans_df.data[cle_group_by].append(value)
         compteur = 0
-        for key in trans_df.data.keys():
+        data_temp = deepcopy(trans_df.data)
+        for key in data_temp.keys():
             trans_df.data[compteur] = trans_df.data[key]
             compteur +=1
             del trans_df.data[key]

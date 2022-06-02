@@ -1,4 +1,3 @@
-from email import message_from_binary_file
 from Outils.import_JSON import import_json
 from Structure.pipeline import Pipeline
 from Structure.dataframe import Dataframe
@@ -37,31 +36,34 @@ Test_pip = Pipeline()
 #   pour l'import la structure est la même que précédemment à laquelle on retire le Booléen
 #   (on stocke par défaut le dataframe importé)
 
-Test_pip.ajouter_operation(('data_1',import_csv('Data/synop.csv.gz-20220511/donnees_meteo','synop.201301.csv.gz')))
-Test_pip.ajouter_operation((True,'new_data',Select('data_1',['numer_sta','dd',''])))
-print(Test_pip.execution())
+#Test_pip.ajouter_operation(('data_1',import_csv('Data/synop.csv.gz-20220511/donnees_meteo','synop.201301.csv.gz')))
+#Test_pip.ajouter_operation((True,'new_data',Select('data_1',['numer_sta','dd',''])))
+#print(Test_pip.execution())
 
-Test_pip.ajouter_operation(('data_2',import_json('Data/electricity_data','2013-01.json.gz')))
-Test_pip.ajouter_operation((True,'data_group',Groupby('data_2',['region'])))
-Test_pip.ajouter_operation((False ,'',moyenne_glissante('data_2', ['consommation_brute_electricite_rte'],10)))
-print(Test_pip.execution())
+#Test_pip.ajouter_operation(('data_2',import_json('Data/electricity_data','2013-01.json.gz')))
+#Test_pip.ajouter_operation((True,'data_group',Groupby('data_2',['region'])))
+#Test_pip.ajouter_operation((False ,'',moyenne_glissante('data_2', ['consommation_brute_electricite_rte'],10)))
+#print(Test_pip.execution())
 
 #Méthode sans pipeline pour moyenne glissante
-header,data = import_json('Data/electricity_data','2013-01.json.gz').importing() #Importer des données
-moy_gli = Dataframe('df', header, data) #créer un dataframe
-print(moy_gli.header_names()) #trouver le nom des colonnes
-print(moyenne_glissante(moy_gli, ['consommation_brute_electricite_rte'])._operation(10)) #Moyenne glissante avec un pas de 10
-print(moy_gli.header)
+#header,data = import_json('Data/electricity_data','2013-01.json.gz').importing() #Importer des données
+#moy_gli = Dataframe('df', header, data) #créer un dataframe
+#print(moy_gli.header_names()) #trouver le nom des colonnes
+#print(moyenne_glissante(moy_gli, ['consommation_brute_electricite_rte'])._operation(10)) #Moyenne glissante avec un pas de 10
+#print(moy_gli.header)
 
 #Méthode sans pipeline pour regression:
-col_x = [5,4,15,1,2,4, 2]
-col_y = [20,16,45,4,'mq',12,3]
-reg = Regression_lineaire(col_x, col_y, 'fois_4') #Dans ce cas les colonnes sont corélées
-reg._operation() #execution : un fichier jpg est ajouté dans ExportedFiles
+#col_x = [5,4,15,1,2,4, 2]
+#col_y = [20,16,45,4,'mq',12,3]
+#reg = Regression_lineaire(col_x, col_y, 'fois_4') #Dans ce cas les colonnes sont corélées
+#reg._operation() #execution : un fichier jpg est ajouté dans ExportedFiles
 
 #importation des donnees de janvier 2013
-data_1_stockee=Test_pip.ajouter_operation(('data_1',import_csv('Data/synop.csv.gz-20220511/donnees_meteo','synop.201301.csv.gz')))[0]
-data_2_stockee=Test_pip.ajouter_operation(('data_2',import_json('Data/electricity_data','2013-01.json.gz')))[0]
+Test_pip = Pipeline()
+Test_pip.ajouter_operation(('data_1',import_csv('Data/synop.csv.gz-20220511/donnees_meteo','synop.201301.csv.gz')))
+data_1_stockee= Test_pip.execution()[0]
+Test_pip.ajouter_operation(('data_2',import_json('Data/electricity_data','2013-01.json.gz')))
+data_2_stockee=Test_pip.execution()[0]
 
 #importation des donnees de novembre 2021
 header_meteo, data_meteo = import_csv('Data/synop.csv.gz-20220511/donnees_meteo','synop.202111.csv.gz').importing()
@@ -84,8 +86,12 @@ Data_elec_11_2021.header[0][0] = 'Region'
 Data_sta_reg=Join(Data_meteo_20_01,Association_region_idstation,['ID'],methode='inter')#left ou right join?
 #Realisons la jointure entre cette table et les donnees electricite par 'Region'
 Data_temp_meteo_region=Join(Data_sta_reg,Data_elec_11_2021,['Region'],methode='inter')
-data_desiree=Groupby(Data_temp_meteo_region,['Region'])
+data_desiree,liste_group=Groupby(Data_temp_meteo_region,['Region'])._operation()
 #prenons un exemple de region(Normandie):
+for table in liste_group: 
+    Formater(table,['t'],str,float)
+    Regression_lineaire(table.col('consommation_brute_electricite_rte'),table.col('t')).R2
+    Regression_lineaire(table.col('consommation_brute_electricite_rte'),table.col('t'))._operation()
 #Ici je voulais selectionner les lignes dont la region c'est normandie mais jsp comment faire
 #Apres on realise la regression
 #formatons la variable temperature 't' en float
