@@ -41,6 +41,11 @@ Test_pip.ajouter_operation(('data_1',import_csv('Data/synop.csv.gz-20220511/donn
 Test_pip.ajouter_operation((True,'new_data',Select('data_1',['numer_sta','dd',''])))
 print(Test_pip.execution())
 
+Test_pip.ajouter_operation(('data_2',import_json('Data/electricity_data','2013-01.json.gz')))
+Test_pip.ajouter_operation((True,'data_group',Groupby('data_2',['region'])))
+Test_pip.ajouter_operation((False ,'',moyenne_glissante('data_2', ['consommation_brute_electricite_rte'],10)))
+print(Test_pip.execution())
+
 #Méthode sans pipeline pour moyenne glissante
 header,data = import_json('Data/electricity_data','2013-01.json.gz').importing() #Importer des données
 moy_gli = Dataframe('df', header, data) #créer un dataframe
